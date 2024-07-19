@@ -33,6 +33,7 @@
                             <!-- 二级导航栏 type1 -->
                             <div class="header_nav_sec_type1"
                                  v-show="item.type == 1 && headerNavShow == true && navActiveIndex == index"
+                                 :class="index == 1 ? 'box2' : 'header_nav_sec_type1' "
                             >
                             <!-- v-if="item.type == 1 && headerNavShow == true"  -->
                                 <ul class="header_nav_sec_left" @mouseover="navSecEventAgent">
@@ -50,29 +51,34 @@
                                         <ul class="header_nav_sec_right"  
                                             v-show="secActiveIndex == secLeftIndex"
                                             >
-                                            <div class="header_sec_left_item_title_text">{{ secLeftItem.titleText }}</div>
-                                            <!-- 三级导航栏的项目 -->
-                                            <div class="header_sec_right_item_box">
-                                                <li class="header_sec_right_item"
-                                                    v-for="(secRightItem,secRightIndex) of secLeftItem.sec_right_Data"
-                                                    :key="secRightIndex"
-                                                    >
-                                                    <div class="header_sec_right_item_text">
-                                                        <img :src="secRightItem.supply" class="right_item_icon"></img>
-                                                        <div class="right_item_text">
-                                                            <a  class="right_item_title_text"
-                                                                :href="secRightItem.href"
-                                                            >{{ secRightItem.name }}</a>
-                                                            <div class="right_item_description_text">{{ secRightItem.description }}</div>
+                                            <div class="bigBox" 
+                                                :class="!!secLeftItem.moreText ? 'box1' : 'bigbox' "
+                                            >
+                                                <div class="header_sec_left_item_title_text">{{ secLeftItem.titleText }}</div>
+                                                <!-- 三级导航栏的项目 -->
+                                                <div class="header_sec_right_item_box">
+                                                    <li class="header_sec_right_item"
+                                                        v-for="(secRightItem,secRightIndex) of secLeftItem.sec_right_Data"
+                                                        :key="secRightIndex"
+                                                        >
+                                                        <div class="header_sec_right_item_text">
+                                                            <img :src="secRightItem.supply" class="right_item_icon" v-if="!!secRightItem.supply"></img>
+                                                            <div class="right_item_text">
+                                                                <a  class="right_item_title_text"
+                                                                    :href="secRightItem.href"
+                                                                >{{ secRightItem.name }}</a>
+                                                                <div class="right_item_description_text">{{ secRightItem.description }}</div>
+                                                            </div>     
                                                         </div>
-                                                        
-                                                    </div>
-                                                </li>
+                                                    </li>
+                                                </div>
                                             </div>
+                                            
                                             
                                             <!-- 三级导航栏的更多推荐 type1-->
                                             <div class="header_sec_right_more_text">
-                                                <div class="right_item_more_text" v-if="!!secLeftItem.moreText">{{ secLeftItem.moreText }}
+                                                <div class="right_item_more_border"></div>
+                                                <div class="right_item_more_text" v-if="!!secLeftItem.moreText">{{ secLeftItem.moreText }} >
                                                     <a :href="secLeftItem.img_href">
                                                         <img :src="secLeftItem.img" class="right_item_more_img">
                                                     </a>
@@ -98,8 +104,10 @@
                             <!-- 二级导航栏 type2-->
                             <div class="header_nav_sec_type2"
                                  v-show="item.type == 2 && headerNavShow == true && navActiveIndex == index"
+                                 :style="{left:(index == 5 ? '-460px' : '-310px')}"
+                                 :class="index == 5 ? 'box3' : 'header_nav_sec_type2'"
                             >
-                            <!-- v-if="item.type == 2 && headerNavShow == true"ƒ -->
+                            <!-- :class="index == 6 ? 'box3' : 'header_nav_sec_type2' " -->
                                 <ul class="header_nav_sec_left" @mouseover="navSecEventAgent">
                                     <li class="header_sec_left_item"
                                         v-for="(secLeftItem,secLeftIndex) of item.sec_left_Data"
@@ -112,20 +120,17 @@
                                         >{{ secLeftItem.name }}</a>
 
                                         <!-- 三级导航栏 -->
-                                        <ul class="header_nav_sec_right"  
-                                            v-show="secActiveIndex == secLeftIndex"
-                                            >
+                                        <ul class="header_nav_sec_right">
                                             <!-- 三级导航栏的项目 -->
                                             <li class="header_sec_right_item"
                                                 v-for="(secRightItem,secRightIndex) of secLeftItem.sec_right_Data"
                                                 :key="secRightIndex"
                                                 >
-                                                <div class="header_sec_right_item_text">
-                                                    <a  class="right_item_title__text"
+                                                <div class="right_item_text">
+                                                    <a  class="right_item_title_text"
                                                         :href="secRightItem.href"
                                                     >{{ secRightItem.name }}</a>
-                                                    <div class="right_item_description_text">{{ secRightItem.description }}</div>
-                                                    <i :src="secRightItem.relay" class="right_item_icon"></i>
+                                                    <img :src="secRightItem.relay" class="right_item_icon" v-if="!!secRightItem.relay"></img>
                                                 </div>
                                             </li>
                                             <!-- 三级导航栏的更多推荐 type1-->
@@ -141,16 +146,22 @@
                                     </li>
                                 </ul>
                                 <!-- 三级导航栏的更多推荐 type2-->
-                                <div class="right_item_more_text2" v-if="!!item.moreText">{{ item.moreText }}
-                                    <a :href="item.img_href">
-                                        <img :src="item.img">
+                                <div class="right_item_more_text2" v-if="!!item.moreText">
+                                    <p class="right_item_more_text">{{ item.moreText }}</p>
+                                    <a :href="item.img_href" class="right_item_more_img_box">
+                                        <img :src="item.img" class="right_item_more_img">
                                     </a>  
-                                    <a :href="item.img_href" v-if="!!item.bottomText">{{ item.bottomText }}</a>
+                                    <a :href="item.img_href" 
+                                        class="right_item_more_dirText"
+                                        v-if="!!item.bottomText">{{ item.bottomText }}</a>
                                 </div>
+                                
                             </div>
                         </li>
                     </ul>
                 </div>
+
+                <!-- 地球语言下拉选择、登录注册、购买电话、申请体验、搜索 -->
                 <div class="header_right">
                     <!-- 语言选择、登录、注册  -->
                     <div class="header_phone">
@@ -200,6 +211,7 @@ import staff from '@/assets/myqcloud_staff.jpg'
 import goout from '@/assets/myqcloud_goout.jpg'
 import relay from '@/assets/relay.svg'
 import supply from '@/assets/supply_chain.svg'
+import game from '@/assets/myqcloud_game.jpg'
 import { Icon } from 'vant'
 
    
@@ -210,7 +222,6 @@ import { Icon } from 'vant'
     };
     const mouseLeaveRegion = () => {
         showRegion.value = false;
-        // console.log("🚀 ~ mouseLeaveRegion ~ mouseLeaveRegion:", mouseLeaveRegion);
     };
 
     // 导航栏数据
@@ -668,11 +679,13 @@ import { Icon } from 'vant'
                 {
                     id:'2-1',
                     name:'热点方案',
+                    moreText:'热点方案推荐',
                     sec_right_Data:[
                         {
                             id:'2-1-1',
                             name:'企业级AI平台解决方案',
                             href:'#',
+                            supply:''
                         },
                         {
                             id:'2-1-2',
@@ -1035,7 +1048,7 @@ import { Icon } from 'vant'
                 },
             ],
             moreText:'开发者大赛',
-            img:plan,
+            img:game,
             img_href:'#', 
             bottomText:'第六届金蝶云·苍穹追光者开发大赛'
         },
@@ -1284,11 +1297,9 @@ import { Icon } from 'vant'
     let headerNavShow = ref(false);
     const hoverNav = () => {
         headerNavShow.value = true;
-        // console.log(headerNavShow.value);
     }
     const notHoverNav = () => {
-        headerNavShow.value = false;
-        // console.log(headerNavShow.value);
+        headerNavShow.value = true;
     }
     // 一级导航栏-->二级导航栏
     let navActiveIndex = ref(0);
@@ -1300,8 +1311,6 @@ import { Icon } from 'vant'
         if( +hoverNavIndex != NaN && navClassName == 'nav_item_text'){
             navActiveIndex.value = +hoverNavIndex;
         }
-        // console.log(event.target.dataset.index)
-        // console.log(navActiveIndex.value)
     }
     // 二级导航栏-->三级导航栏
     let secActiveIndex = ref(0);
@@ -1313,18 +1322,12 @@ import { Icon } from 'vant'
         if( +hoverSecIndex != NaN && secClassName == 'left_item_text'){
             secActiveIndex.value = +hoverSecIndex;
         }
-        // console.log(event.target.className)
-        // console.log(secClassName)
-        // console.log(+hoverSecIndex)
-        // console.log(event.target.dataset.index)
-        // console.log(secActiveIndex.value)
     }
-    // let secShowIndex;
-    // const navSecEventAgent = (event) => {
-    //     const hoverSecIndex = event.target.dataset.index;
-    //     secShowIndex = hoverSecIndex;
-    //     console.log("🚀 ~ eventAgent ~ hoverSecIndex:", hoverSecIndex);
-    //     console.log("二级title："+secShowIndex);
+
+    // 三级导航栏.header_sec_right_item_box的 width 百分比
+    // let showPercent = ref(false);
+    // if(index === 0){
+    //     if()
     // }
 
 
@@ -1370,6 +1373,11 @@ import { Icon } from 'vant'
         @media screen and (min-width: 2200px){
             .content{
                 width: 2000px;
+            }
+        }
+        @media screen and (min-width: 2500px){
+            .content{
+                width: 2300px;
             }
         }
 
@@ -1498,77 +1506,102 @@ import { Icon } from 'vant'
                             width: 916px;
                             position: absolute;
                             top: 0px;
-                            overflow: scroll;
+                            overflow-y: scroll;
 
-                            // 三级导航栏的li大标题
-                            .header_sec_left_item_title_text{
-                                color: rgb(0, 0, 0);
-                                line-height: 55px;
-                                font-size: 18px;
-                                padding-left: 21px;
-                                // background-color: pink;
-                            }
-                            // 三级导航栏的li
-                            .header_sec_right_item_box{
+                            .bigBox{
                                 display: inline-block;
                                 width: 100%;
-                                // background-color: rgb(230, 171, 20);
-
-                                .header_sec_right_item{
-                                    // border: 1px solid yellow;
+                                // 三级导航栏的li大标题
+                                .header_sec_left_item_title_text{
+                                    color: rgb(0, 0, 0);
+                                    line-height: 69px;
+                                    font-size: 18px;
+                                    padding-left: 21px;
+                                    width: 550px;
                                     display: inline-block;
-                                    white-space: pre-wrap;
-                                    line-height: 25px;
-                                    width: 50%;
-                                    padding: 10px 0 38px 0;
-                                    
-                                    .header_sec_right_item_text{
+                                }
+                                // 三级导航栏的li
+                                .header_sec_right_item_box{
+                                    display: inline-block;
+                                    width: 100%;
 
-                                        // 三级导航栏的后置icon
-                                        .right_item_icon{
-                                            display: inline-block;
-                                            width: 50px;
-                                            height: 61px;
-                                            padding-left: 21px;
-                                           
-                                        }
-                                        .right_item_text{
-                                            display: inline-block;
-                                            margin-left: 20px;
-
-                                            // 三级导航栏的li标题
-                                            .right_item_title_text{
-                                                color: rgb(37, 43, 58);
-                                                font-size: 16px;
-                                            }
-                                            // 三级导航栏的li描述
-                                            .right_item_description_text{
-                                                color: rgb(170, 170, 170);
-                                                font-size: 14px;
-                                            }
-                                        }
-                                        .right_item_title_text:hover{
-                                            color: rgb(0, 104, 221);
-                                        }
+                                    .header_sec_right_item{
+                                        display: inline-block;
+                                        white-space: pre-wrap;
+                                        line-height: 25px;
+                                        width: 50%;
+                                        padding: 0px 0 51px 0;
+                                        margin-top: -3px;
                                         
+                                        .header_sec_right_item_text{
+                                            margin-top: 12px;
+                                            // 三级导航栏的前置icon
+                                            .right_item_icon{
+                                                display: inline-block;
+                                                width: 50px;
+                                                height: 50px;
+                                                padding-left: 21px;
+                                            
+                                            }
+                                            .right_item_text{
+                                                display: inline-block;
+                                                margin-left: 20px;
+
+                                                // 三级导航栏的li标题
+                                                .right_item_title_text{
+                                                    color: rgb(37, 43, 58);
+                                                    font-size: 16px;
+                                                }
+                                                // 三级导航栏的li描述
+                                                .right_item_description_text{
+                                                    color: rgb(170, 170, 170);
+                                                    font-size: 14px;
+                                                    width: 295px;
+                                                }
+                                            }
+                                            .right_item_title_text:hover{
+                                                color: rgb(0, 104, 221);
+                                            }
+                                            
+                                        }
                                     }
                                 }
                             }
+                            .box1{
+                                width: 66.9%;
+                            }
+                            
                             
                             // 三级导航栏最右侧的更多推荐板块
                             .header_sec_right_more_text{
                                 display: inline-block;
-                                position: absolute;
-                                top: 0px;
+                                width: 303px;
+                                height: 480px;
+                                float: right;
+
+                                // 更多推荐border
+                                .right_item_more_border{
+                                    display: inline-block;
+                                    width: 1px;
+                                    height: 440px;
+                                    margin-top: 20px;
+                                    background-color: rgb(229, 232, 237);
+                                }
                                 // 更多推荐标题
                                 .right_item_more_text{
+                                    display: inline-block;
                                     color: rgb(37, 43, 58);
                                     font-size: 16px;
                                     display: block;
+                                    line-height: 50px;
+                                    padding: 10px 31px 0 0;
+                                    float: right;
+                                    
                                     // 更多推荐图片
                                     .right_item_more_img{
                                         display: block;
-                                        height: 200px;
+                                        height: 160px;
+                                        width: 255px;
                                     }
                                 }
                             }
@@ -1593,33 +1626,129 @@ import { Icon } from 'vant'
                         }
                     }
                 }
-                .header_nav_sec_right{
-                    background-color: rgb(208, 101, 85);
-                }
-                .right_item_more_text{
-                    background-color: aqua;
-                }
-                .right_item_more_text2{
-                    background-color: pink;
-                }
+            }
+
+            .box2{
+                left: -206.2px;
             }
 
             // 二级导航栏在上 + 三级导航栏在下 的布局
             .header_nav_sec_type2{
-                background-color: rgb(173, 230, 191);
                 position: absolute;
-                top: 60px;
-                .header_nav_sec_right{
-                    background-color: rgb(184, 127, 230);
+                top: 90px;
+                width: auto;
+                min-width: 872px;
+                left: -240px;
+                height: auto;
+                border-top: 1px solid rgb(229, 232, 237);
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px 0px;
+
+                // 二级导航栏的ul
+                .header_nav_sec_left{
+                    min-height: 350px;
+                    display: inline-block;
+
+                    // 二级导航栏的li
+                    .header_sec_left_item{
+                        line-height: 50px;
+                        margin: 0 -20px 0 50px;
+                        float: left;
+                        height: 250px;
+                        width: 180px;
+
+                        // 二级导航栏的a(文本：业务领域……)
+                        .left_item_text{
+                            font-size: 16px;
+                            color: rgb(37, 43, 58);
+                            font-weight: 451;
+                            padding: 0px 75px 0 0px;
+                            padding-bottom: 15px;
+                            border-bottom: 1px solid rgb(229, 232, 237);
+                        }
+
+                        // 三级导航栏的ul
+                        .header_nav_sec_right{
+                            line-height: 50px;
+                            position: absolute;
+                            padding-top: 10px;
+                            
+                            // 三级导航栏的li
+                            .header_sec_right_item{
+                                line-height: 25px;
+                                
+                                // 三级导航栏的li标题
+                                .right_item_text{
+                                    
+                                    .right_item_title_text{
+                                        color: rgb(87, 93, 108);
+                                        font-size: 14px;
+                                        line-height: 11px;
+                                        padding: 0px 0;
+                                    }
+                                    .right_item_title_text:hover{
+                                        color: rgb(19, 120, 228);
+                                    }
+
+                                    // 三级导航栏的后置icon
+                                    .right_item_icon{
+                                        display: inline-block;
+                                        width: 11px;
+                                        height: 11px;
+                                        padding-left: 5px;
+                                    
+                                    }   
+                                }
+                            }
+                        }
+                    }
                 }
-                .right_item_more_text{
-                    background-color: aqua;
-                }
+
+                // 三级导航栏最右侧的更多推荐板块          
                 .right_item_more_text2{
-                    background-color: pink;
+                    display: inline-block;
+                    float: right;
+                    padding-right: 31px;
+
+                    // 更多推荐标题 p
+                    .right_item_more_text{
+                        width: auto;
+                        line-height: 50px;
+                        color: rgb(37, 43, 58);
+                        font-size: 16px;
+                        font-weight: 451;
+                    }
+                    .right_item_more_dirText{
+                        display: block;
+                        line-height: 0px;
+                        margin-top: 15px;
+                        color: rgb(37, 43, 58);
+                    }
+                    .right_item_more_dirText:hover{
+                        color: rgb(19, 120, 228);
+                    }
+                    // 更多推荐图片
+                    .right_item_more_img_box{
+                        display: block;
+                        width: 300px;
+                        height: 188px;
+                        overflow: hidden;
+                        .right_item_more_img{
+                            width: 300px;
+                            // padding-top: 1px;
+                            transition: all 0.5s ease 0s;
+                            overflow: hidden;
+                        }
+                        .right_item_more_img:hover{
+                            transform: scale(1.1);
+                        }
+                    }
+                    
                 }
             }
             
+            .box3{
+                width: 1200px;
+            }
             
         }
 
