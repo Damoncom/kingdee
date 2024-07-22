@@ -17,8 +17,12 @@
     "reset-css": "^5.0.2",
     "sass": "^1.77.8",
     "simplebar-vue": "^2.3.5",
+    "swiper": "^11.1.5",
     "vant": "4.0",
     "vue": "^3.4.29",
+    "vue-animate-number": "^0.4.2",
+    "vue-awesome-swiper": "^5.0.1",
+    "vue-number-animation": "^2.0.2",
     "vue-router": "4.0"
   },
   "devDependencies": {

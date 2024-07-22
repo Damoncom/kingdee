@@ -7,7 +7,20 @@ import 'reset-css'
 // import BScroll from '@better-scroll/core'
 import App from './components/Home.vue'
 
+// import router from './router'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/css';
+// import VueAnimateNumber from "vue-animate-number";
+// import NumberAnimation from "vue-number-animation"
+
 const app = createApp(App)
-// app.use(ElementPlus)
 app.mount('#app')
+app.use(VueAwesomeSwiper)
+// app.use(router)
+// createApp(App).use(VueAwesomeSwiper).use(router).mount('#app')
+// app.use(ElementPlus)
 // app.use(BScroll)
+// app.use(NumberAnimation)
+
+
+

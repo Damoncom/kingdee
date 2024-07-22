@@ -25,12 +25,12 @@
                                 :data-name="item.name"
                                 :data-index="index"
                             >{{ item.name }}
-                                <div class="line"></div> 
+                                <div class="line" :class="navActiveIndex == index ? 'hover-line' : ''"></div> 
                             </a>
 
                             <!-- 二级导航栏 type1 -->
                             <div class="header_nav_sec_type1"
-                                 v-show="item.type == 1 && headerNavShow == true && navActiveIndex == index"
+                                 v-show="item.type == 1 && navActiveIndex == index"
                                  :class="index == 1 ? 'box2' : 'header_nav_sec_type1' "
                             >
                                 <ul class="header_nav_sec_left" @mouseover="navSecEventAgent">
@@ -42,6 +42,7 @@
                                             :href="secLeftItem.href"
                                             :data-name="secLeftItem.name"
                                             :data-index="secLeftIndex"
+                                            :class="secActiveIndex == secLeftIndex ? 'left_item_text_hover' : ''"
                                         >{{ secLeftItem.name }}</a>
 
                                         <!-- 三级导航栏 -->
@@ -63,7 +64,7 @@
                                                         :key="secRightIndex"
                                                         >
                                                         <div class="header_sec_right_item_text">
-                                                            <img :src="secRightItem.supply" class="right_item_icon" v-if="!!secRightItem.supply"></img>
+                                                            <img :src="secRightItem.supply" class="right_item_icon" v-if="!!secRightItem.supply">
                                                             <div class="right_item_text">
                                                                 <a  class="right_item_title_text"
                                                                     :href="secRightItem.href"
@@ -82,7 +83,7 @@
                                                         <div class="header_sec_right_item_text">
                                                             <div class="right_item_icontitle">
                                                                 <div class="right_item_icon_box">
-                                                                    <img :src="secRightItem.supply" class="right_item_icon" v-if="!!secRightItem.supply"></img>
+                                                                    <img :src="secRightItem.supply" class="right_item_icon" v-if="!!secRightItem.supply">
                                                                 </div>
                                                                 <div class="right_item_text">
                                                                     <a  class="right_item_title_text"
@@ -152,7 +153,7 @@
                             </div>
                             <!-- 二级导航栏 type2-->
                             <div class="header_nav_sec_type2"
-                                 v-show="item.type == 2 && headerNavShow == true && navActiveIndex == index"
+                                 v-show="item.type == 2 && navActiveIndex == index"
                                  :style="{left:(index == 5 ? '-490px' : '-310px')}"
                                  :class="index == 5 ? 'box3' : 'header_nav_sec_type2'"
                             >
@@ -179,7 +180,7 @@
                                                     <a  class="right_item_title_text"
                                                         :href="secRightItem.href"
                                                     >{{ secRightItem.name }}</a>
-                                                    <img :src="secRightItem.relay" class="right_item_icon" v-if="!!secRightItem.relay"></img>
+                                                    <img :src="secRightItem.relay" class="right_item_icon" v-if="!!secRightItem.relay">
                                                 </div>
                                             </li>
                                             <!-- 三级导航栏的更多推荐 type1-->
@@ -264,7 +265,7 @@
                 
                 <!-- 背景图片 -->
                 <div class="content_image_box">
-                    <img class="content_image"src="@/assets/bkImage.jpg">
+                    <img class="content_image" src="@/assets/bkImage.jpg">
                 </div>
 
                 <!-- 资讯导航 -->
@@ -322,7 +323,7 @@
 
                 <!-- 金蝶云产品 -->
                 <div class="content_cloudpro">
-                    <div class="wraper">
+                    <div class="wrapper">
                         <!-- 标题部分 -->
                         <div class="content_cloudpro_title">
                             <h2 class="title">金蝶云产品能为您做什么</h2>
@@ -346,229 +347,352 @@
                         </div>
                         <!-- 内容部分 -->
                         <div class="content_cloudpro_cont">
-                            <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 0">
-                                <!-- 左侧内容 -->
-                                <div class="cont_box_left">
-                                    <div class="cont_logo">
-                                        <img src="@/assets/info_img1.jpg" class="logo_img">
-                                    </div>
-                                    <div class="cont_title">
-                                        <p class="title_text">企业级AI平台</p>
-                                    </div>
-                                    <div class="cont_discrition">
-                                        <p class="title_discrition">基于企业级云原生架构打造的数字战斗力引擎，为企业提供多场景、多层次的数字化支撑，帮助企业快速构建强大的业务创新能力和中台架构，是EBC最佳的落地实践平台</p>
-                                    </div>
-                                    <div class="cont_product-link">
-                                        <a href="#" class="product_link">
-                                            <p class="text">方案详情</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                        <a href="#" class="product_link2">
-                                            <p class="text">预约演示</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                    </div>
-                                    <div class="cont_product-label">
-                                        <ul class="product_list">
-                                            <li class="product_item"
-                                                v-for="(product,product_index) of productList1"
-                                                :key="product_index"
-                                            >
-                                                <a :href="product.href">{{ product.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 右侧内容 -->
-                                <div class="cont_box_right">
-                                    <div class="cont_imgBox">
-                                        <img src="@/assets/tabnav_img1.jpg" class="img">
-                                    </div>
-                                    <div class="cont_content">
-                                        <div class="content_text">
-                                            <ul class="content_list">
-                                                <li class="content_item"
-                                                    v-for="(content,content_index) of contentList1"
-                                                    :key="content_index"
+                            <Transition name="blink">
+                                <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 0">
+                                    <!-- 左侧内容 -->
+                                    <div class="cont_box_left">
+                                        <div class="cont_logo">
+                                            <img src="@/assets/info_img1.jpg" class="logo_img">
+                                        </div>
+                                        <div class="cont_title">
+                                            <p class="title_text">企业级AI平台</p>
+                                        </div>
+                                        <div class="cont_discrition">
+                                            <p class="title_discrition">基于企业级云原生架构打造的数字战斗力引擎，为企业提供多场景、多层次的数字化支撑，帮助企业快速构建强大的业务创新能力和中台架构，是EBC最佳的落地实践平台</p>
+                                        </div>
+                                        <div class="cont_product-link">
+                                            <a href="#" class="product_link">
+                                                <p class="text">方案详情</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                            <a href="#" class="product_link2">
+                                                <p class="text">预约演示</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                        </div>
+                                        <div class="cont_product-label">
+                                            <ul class="product_list">
+                                                <li class="product_item"
+                                                    v-for="(product,product_index) of productList1"
+                                                    :key="product_index"
                                                 >
-                                                    <p class="item_num">{{ content.num }}</p>
-                                                    <p class="item_name">{{ content.name }}</p>
+                                                    <a :href="product.href">{{ product.name }}</a>
                                                 </li>
                                             </ul>
-                                            <div class="item_discrition">助力云南中烟完成ERP软件的国产化替代，实现核心业务、基坛技术、卷烟供应业务数据等的一体化集中管控，推动云南中烟高质量发展</div>
-                                            <a href="#" class="content_more">案例详情  >></a>
                                         </div>
                                     </div>
+                                    <!-- 右侧内容 -->
+                                    <div class="cont_box_right">
+                                        <div class="cont_imgBox">
+                                            <img src="@/assets/tabnav_img1.jpg" class="img">
+                                        </div>
+                                        <div class="cont_content">
+                                            <div class="content_text">
+                                                <ul class="content_list">
+                                                    <li class="content_item"
+                                                        v-for="(content,content_index) of contentList1"
+                                                        :key="content_index"
+                                                    >
+                                                        <p class="item_num">{{ content.num }}</p>
+                                                        <p class="item_name">{{ content.name }}</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="item_discrition">助力云南中烟完成ERP软件的国产化替代，实现核心业务、基坛技术、卷烟供应业务数据等的一体化集中管控，推动云南中烟高质量发展</div>
+                                                <a href="#" class="content_more">案例详情  >></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
+                            <Transition name="blink">
+                                <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 1">
+                                    <!-- 左侧内容 -->
+                                    <div class="cont_box_left">
+                                        <div class="cont_logo">
+                                            <img src="@/assets/info_img2.jpg" class="logo_img">
+                                        </div>
+                                        <div class="cont_title">
+                                            <p class="title_text">大型企业SaaS管理云</p>
+                                        </div>
+                                        <div class="cont_discrition">
+                                            <p class="title_discrition">凭借千亿级高性能和世界一流企业的实践，帮助大企业实现可信的数字化系统升迁，打造韧性企业，支撑商业创新和管理重构，已成为500强企业的新选择</p>
+                                        </div>
+                                        <div class="cont_product-link">
+                                            <a href="#" class="product_link">
+                                                <p class="text">方案详情</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                            <a href="#" class="product_link2">
+                                                <p class="text">预约演示</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                        </div>
+                                        <div class="cont_product-label">
+                                            <ul class="product_list">
+                                                <li class="product_item"
+                                                    v-for="(product,product_index) of productList2"
+                                                    :key="product_index"
+                                                >
+                                                    <a :href="product.href">{{ product.name }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- 右侧内容 -->
+                                    <div class="cont_box_right">
+                                        <div class="cont_imgBox">
+                                            <img src="@/assets/tabnav_img2.jpg" class="img">
+                                        </div>
+                                        <div class="cont_content">
+                                            <div class="content_text">
+                                                <ul class="content_list">
+                                                    <li class="content_item"
+                                                        v-for="(content,content_index) of contentList2"
+                                                        :key="content_index"
+                                                    >
+                                                        <p class="item_num">{{ content.num }}</p>
+                                                        <p class="item_name">{{ content.name }}</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="item_discrition">等构建中央数字中心体系，整合内部上千个信息化系统，打造公共服务业务服务、数据服务三层平台架构，突实现战略与业务模式转型</div>
+                                                <a href="#" class="content_more">案例详情  >></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
+                            <Transition name="blink">
+                                <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 2">
+                                    <!-- 左侧内容 -->
+                                    <div class="cont_box_left">
+                                        <div class="cont_logo">
+                                            <img src="@/assets/info_img3.jpg" class="logo_img">
+                                        </div>
+                                        <div class="cont_title">
+                                            <p class="title_text">新一代成长型企业EBC</p>
+                                        </div>
+                                        <div class="cont_discrition">
+                                            <p class="title_discrition">基于企业级云原生架构金蝶云·苍穹打造安全可靠的数字化平台，为企业提供成熟、可拓展的企业业务能力。支持多组织、多核算体系，提供全面一体化解决方案</p>
+                                        </div>
+                                        <div class="cont_product-link">
+                                            <a href="#" class="product_link">
+                                                <p class="text">方案详情</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                            <a href="#" class="product_link2">
+                                                <p class="text">预约演示</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                        </div>
+                                        <div class="cont_product-label">
+                                            <ul class="product_list">
+                                                <li class="product_item"
+                                                    v-for="(product,product_index) of productList3"
+                                                    :key="product_index"
+                                                >
+                                                    <a :href="product.href">{{ product.name }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- 右侧内容 -->
+                                    <div class="cont_box_right">
+                                        <div class="cont_imgBox">
+                                            <img src="@/assets/tabnav_img3.jpg" class="img">
+                                        </div>
+                                        <div class="cont_content">
+                                            <div class="content_text">
+                                                <ul class="content_list">
+                                                    <li class="content_item"
+                                                        v-for="(content,content_index) of contentList3"
+                                                        :key="content_index"
+                                                    >
+                                                        <p class="item_num">{{ content.num }}</p>
+                                                        <p class="item_name">{{ content.name }}</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="item_discrition">基于金蝶云星空平台，加快实施公司密封产业智能制造项目，进一步提升产品品质，再用两到三年实现企业智能化，支撑公司战略与模式转型</div>
+                                                <a href="#" class="content_more">案例详情  >></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
+                            <Transition name="blink">
+                                <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 3">
+                                    <!-- 左侧内容 -->
+                                    <div class="cont_box_left">
+                                        <div class="cont_logo">
+                                            <img src="@/assets/info_img4.jpg" class="logo_img">
+                                        </div>
+                                        <div class="cont_title">
+                                            <p class="title_text">小型企业SaaS管理云</p>
+                                        </div>
+                                        <div class="cont_discrition">
+                                            <p class="title_discrition">聚焦小型企业在线经营和数字化管理，支持企业拓客开源、智能管理、实时决策。连接生态伙伴，为小微企业提供一站式服务，助力企业快速成长</p>
+                                        </div>
+                                        <div class="cont_product-link">
+                                            <a href="#" class="product_link">
+                                                <p class="text">方案详情</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                            <a href="#" class="product_link2">
+                                                <p class="text">预约演示</p>
+                                                <p class="icon">></p>
+                                            </a>
+                                        </div>
+                                        <div class="cont_product-label">
+                                            <ul class="product_list">
+                                                <li class="product_item"
+                                                    v-for="(product,product_index) of productList4"
+                                                    :key="product_index"
+                                                >
+                                                    <a :href="product.href">{{ product.name }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- 右侧内容 -->
+                                    <div class="cont_box_right">
+                                        <div class="cont_imgBox">
+                                            <img src="@/assets/tabnav_img4.jpg" class="img">
+                                        </div>
+                                        <div class="cont_content">
+                                            <div class="content_text">
+                                                <ul class="content_list">
+                                                    <li class="content_item"
+                                                        v-for="(content,content_index) of contentList4"
+                                                        :key="content_index"
+                                                    >
+                                                        <p class="item_num">{{ content.num }}</p>
+                                                        <p class="item_name">{{ content.name }}</p>
+                                                    </li>
+                                                </ul>
+                                                <div class="item_discrition">使用金蝶云·星辰后，商城订单和线下渠道的订单都在进销存中统一管理，库存和资金往来都比较清晰明了，对账方便</div>
+                                                <a href="#" class="content_more">案例详情  >></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中国的软件 -->
+                <div class="content_sorft">
+                    <div class="wrapper">
+                        <div class="title">
+                            <h2 class="title_text">中国的软件 世界的金蝶</h2>
+                        </div>
+                        <!-- 数据 -->
+                        <div class="content_number">
+                            <div class="number_cont">
+                                <ul class="number_list">
+                                    <li class="number_item"
+                                        v-for="(number,number_index) of numberList"
+                                        :key="number_index"
+                                    >
+                                        <div class="number_box">
+                                            <p class="number_num nn">{{ number.num }}</p>
+                                            <!-- <p class="number_num nn">{{ count }}</p> -->
+                                            <!-- <NumberAnimation class="number_num" 
+                                                            :from="0" 
+                                                            :to="number.num"
+                                                            duration='2000'
+                                                            :key="number_index"
+                                                            >{{ number.num }}
+                                            </NumberAnimation> -->
+                                            <p class="number_unit">{{ number.unit }}</p>
+                                        </div>
+                                        <div class="number_text_top">{{ number.textTop }}</div>
+                                        <div class="number_text_bottom">{{ number.textBottom }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 奖项 -->
+                        <div class="content_prize">
+                            <div class="prize_cont">
+                                <ul class="prize_list">
+                                    <li class="prize_item"
+                                        v-for="(prize,prize_index) of prizeList"
+                                        :key="prize_index"
+                                    >
+                                        <div class="prize_img">
+                                            <img src="@/assets/index_prize.png" class="img">
+                                        </div>
+                                        <div class="prize_text">
+                                            <h2 class="title">{{ prize.title }}</h2>
+                                            <div class="discription">
+                                                <p class="discription_text">{{ prize.discription }}</p>
+                                                <p class="discription_name">{{ prize.name }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 行业列表 -->
+                <div class="content_industry">
+                    <div class="wrapper">
+                        <h2 class="industry_title">
+                            30年深耕
+                            <br>
+                            与领军企业共创行业新功能
+                        </h2>
+                        <div class="content_cont">
+                            <div class="swiper_wrapper">
+                                <!-- slide1 -->
+                                <div class="swiper_slide"
+                                    v-for="(slide,slide_index) of slideList1"
+                                    :key="slide_index"
+                                    v-show="showSlide == true"
+                                >
+                                    <a :href="slide.href" class="slide">
+                                        <div class="img">
+                                            <img :src="slide.bkImg" alt="">
+                                        </div>
+                                        <div class="title">
+                                            <img :src="slide.logoImg" class="title_img">
+                                            <h2 class="title_name">{{ slide.name }}</h2>
+                                            <div class="title_dis">{{ slide.discription }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- slide2 -->
+                                <div class="swiper_slide"
+                                    v-for="(slide,slide_index) of slideList2"
+                                    :key="slide_index"
+                                    v-show="showSlide == false"
+                                >
+                                    <a :href="slide.href" class="slide">
+                                        <div class="img">
+                                            <img :src="slide.bkImg" alt="">
+                                        </div>
+                                        <div class="title">
+                                            <img :src="slide.logoImg" class="title_img">
+                                            <h2 class="title_name">{{ slide.name }}</h2>
+                                            <div class="title_dis">{{ slide.discription }}</div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 1">
-                                <!-- 左侧内容 -->
-                                <div class="cont_box_left">
-                                    <div class="cont_logo">
-                                        <img src="@/assets/info_img2.jpg" class="logo_img">
-                                    </div>
-                                    <div class="cont_title">
-                                        <p class="title_text">大型企业SaaS管理云</p>
-                                    </div>
-                                    <div class="cont_discrition">
-                                        <p class="title_discrition">凭借千亿级高性能和世界一流企业的实践，帮助大企业实现可信的数字化系统升迁，打造韧性企业，支撑商业创新和管理重构，已成为500强企业的新选择</p>
-                                    </div>
-                                    <div class="cont_product-link">
-                                        <a href="#" class="product_link">
-                                            <p class="text">方案详情</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                        <a href="#" class="product_link2">
-                                            <p class="text">预约演示</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                    </div>
-                                    <div class="cont_product-label">
-                                        <ul class="product_list">
-                                            <li class="product_item"
-                                                v-for="(product,product_index) of productList2"
-                                                :key="product_index"
-                                            >
-                                                <a :href="product.href">{{ product.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 右侧内容 -->
-                                <div class="cont_box_right">
-                                    <div class="cont_imgBox">
-                                        <img src="@/assets/tabnav_img2.jpg" class="img">
-                                    </div>
-                                    <div class="cont_content">
-                                        <div class="content_text">
-                                            <ul class="content_list">
-                                                <li class="content_item"
-                                                    v-for="(content,content_index) of contentList2"
-                                                    :key="content_index"
-                                                >
-                                                    <p class="item_num">{{ content.num }}</p>
-                                                    <p class="item_name">{{ content.name }}</p>
-                                                </li>
-                                            </ul>
-                                            <div class="item_discrition">等构建中央数字中心体系，整合内部上千个信息化系统，打造公共服务业务服务、数据服务三层平台架构，突实现战略与业务模式转型</div>
-                                            <a href="#" class="content_more">案例详情  >></a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="swiper_button_next" @click="nextSlide">
+                                <i class="iconfont icon-jiantou2"></i>
                             </div>
-                            <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 2">
-                                <!-- 左侧内容 -->
-                                <div class="cont_box_left">
-                                    <div class="cont_logo">
-                                        <img src="@/assets/info_img3.jpg" class="logo_img">
-                                    </div>
-                                    <div class="cont_title">
-                                        <p class="title_text">新一代成长型企业EBC</p>
-                                    </div>
-                                    <div class="cont_discrition">
-                                        <p class="title_discrition">基于企业级云原生架构金蝶云·苍穹打造安全可靠的数字化平台，为企业提供成熟、可拓展的企业业务能力。支持多组织、多核算体系，提供全面一体化解决方案</p>
-                                    </div>
-                                    <div class="cont_product-link">
-                                        <a href="#" class="product_link">
-                                            <p class="text">方案详情</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                        <a href="#" class="product_link2">
-                                            <p class="text">预约演示</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                    </div>
-                                    <div class="cont_product-label">
-                                        <ul class="product_list">
-                                            <li class="product_item"
-                                                v-for="(product,product_index) of productList3"
-                                                :key="product_index"
-                                            >
-                                                <a :href="product.href">{{ product.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 右侧内容 -->
-                                <div class="cont_box_right">
-                                    <div class="cont_imgBox">
-                                        <img src="@/assets/tabnav_img3.jpg" class="img">
-                                    </div>
-                                    <div class="cont_content">
-                                        <div class="content_text">
-                                            <ul class="content_list">
-                                                <li class="content_item"
-                                                    v-for="(content,content_index) of contentList3"
-                                                    :key="content_index"
-                                                >
-                                                    <p class="item_num">{{ content.num }}</p>
-                                                    <p class="item_name">{{ content.name }}</p>
-                                                </li>
-                                            </ul>
-                                            <div class="item_discrition">基于金蝶云星空平台，加快实施公司密封产业智能制造项目，进一步提升产品品质，再用两到三年实现企业智能化，支撑公司战略与模式转型</div>
-                                            <a href="#" class="content_more">案例详情  >></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content_cloudpro_cont_box" v-show="tabActiveIndex == 3">
-                                <!-- 左侧内容 -->
-                                <div class="cont_box_left">
-                                    <div class="cont_logo">
-                                        <img src="@/assets/info_img4.jpg" class="logo_img">
-                                    </div>
-                                    <div class="cont_title">
-                                        <p class="title_text">小型企业SaaS管理云</p>
-                                    </div>
-                                    <div class="cont_discrition">
-                                        <p class="title_discrition">聚焦小型企业在线经营和数字化管理，支持企业拓客开源、智能管理、实时决策。连接生态伙伴，为小微企业提供一站式服务，助力企业快速成长</p>
-                                    </div>
-                                    <div class="cont_product-link">
-                                        <a href="#" class="product_link">
-                                            <p class="text">方案详情</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                        <a href="#" class="product_link2">
-                                            <p class="text">预约演示</p>
-                                            <p class="icon">></p>
-                                        </a>
-                                    </div>
-                                    <div class="cont_product-label">
-                                        <ul class="product_list">
-                                            <li class="product_item"
-                                                v-for="(product,product_index) of productList4"
-                                                :key="product_index"
-                                            >
-                                                <a :href="product.href">{{ product.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 右侧内容 -->
-                                <div class="cont_box_right">
-                                    <div class="cont_imgBox">
-                                        <img src="@/assets/tabnav_img4.jpg" class="img">
-                                    </div>
-                                    <div class="cont_content">
-                                        <div class="content_text">
-                                            <ul class="content_list">
-                                                <li class="content_item"
-                                                    v-for="(content,content_index) of contentList4"
-                                                    :key="content_index"
-                                                >
-                                                    <p class="item_num">{{ content.num }}</p>
-                                                    <p class="item_name">{{ content.name }}</p>
-                                                </li>
-                                            </ul>
-                                            <div class="item_discrition">使用金蝶云·星辰后，商城订单和线下渠道的订单都在进销存中统一管理，库存和资金往来都比较清晰明了，对账方便</div>
-                                            <a href="#" class="content_more">案例详情  >></a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="swiper_button_prev" @click="prevSlide">
+                                <i class="iconfont icon-jiantou2"></i>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -588,6 +712,8 @@ import game from '@/assets/myqcloud_game.jpg'
 import hotSpot1 from '@/assets/hotspot1.jpg'
 import hotSpot2 from '@/assets/hotspot2.jpg'
 import hotSpot3 from '@/assets/hotspot3.jpg'
+import logo from '@/assets/Settings.svg'
+// import NumberAnimation from "vue-number-animation";
 import { Icon } from 'vant'
 
 // 滚动条
@@ -1686,15 +1812,16 @@ import { debounce, throttle } from 'lodash'
 
     // 导航栏显示-------------
     // 一级导航栏的显示
-    let headerNavShow = ref(false);
+    // let headerNavShow = ref(false);
     const hoverNav = () => {
-        headerNavShow.value = true;
+        // headerNavShow.value = true;
     }
     const notHoverNav = () => {
-        headerNavShow.value = false;
+        // headerNavShow.value = false;
+        navActiveIndex.value = -1;
     }
     // 一级导航栏-->二级导航栏
-    let navActiveIndex = ref(0);
+    let navActiveIndex = ref(-1);
     let hoverNavIndex;
     let navClassName;
     // const navListEventAgent = (event) => {
@@ -1707,8 +1834,9 @@ import { debounce, throttle } from 'lodash'
     const navListEventAgent = debounce((event) => {
         hoverNavIndex = event.target.dataset.index;
         navClassName = event.target.className;
-        if( +hoverNavIndex != NaN && navClassName == 'nav_item_text'){
+        if( +hoverNavIndex >=0 && navClassName == 'nav_item_text'){
             navActiveIndex.value = +hoverNavIndex;
+            secActiveIndex.value = 0;
         }
     },100)
     // 二级导航栏-->三级导航栏
@@ -2076,7 +2204,228 @@ import { debounce, throttle } from 'lodash'
         },
     ]
 
+
+    // 中国的软件数据
+    const numberList = [
+        {
+            id:'1',
+            num:'740',
+            unit:'万+',
+            textTop:'服务的企业、组织机构客户数量',
+        },
+        {
+            id:'2',
+            num:'51.2',
+            unit:'%',
+            textTop:'服务超过一半中国500强',
+            textBottom:'已成为500强企业新选择'
+        },
+        {
+            id:'3',
+            num:'43',
+            unit:'%',
+            textTop:'服务专精特新企业',
+            textBottom:'助力中国新经济和智能制造'
+        },
+    ]
     
+    const prizeList = [
+        {
+            id:'1',
+            title:'高生产力aPaas平台',
+            discription:'中国第一、全球前十',
+            name:'Gartner',
+        },
+        {
+            id:'2',
+            title:'企业应用SaaS',
+            discription:'中国第一',
+            name:'IDC',
+        },
+        {
+            id:'3',
+            title:'财务云',
+            discription:'中国第一',
+            name:'IDC',
+        },
+        {
+            id:'4',
+            title:'ERP、财务满意度',
+            discription:'全球第一',
+            name:'IDC',
+        },
+        {
+            id:'5',
+            title:'亚太区制造SaaS竞争力',
+            discription:'中国唯一',
+            name:'IDC',
+        },
+    ]
+
+    // let finalNum = numberList[1].num;
+    // let count = ref(0);
+    // let timer = setInterval(() => {
+    //     count.value++;
+    //     if(count.value > finalNum){
+    //         // 避免count大于finalNum最终数字显示不对
+    //         count.value = finalNum
+    //         // 清空定时器
+    //         clearInterval(timer)
+    //         timer = null
+    //     }
+    //     // console.log(count.value);
+    // },1)
+    // // 每1ms实现一次递增
+    // console.log(numberList[1].num);
+    // // let num = document.getElementsByName(number_num).contentText;
+
+
+    // 行业列表
+    const slideList1 = [
+        {
+            id:'1',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'装备制造',
+            discription:'满足装备制造行业MTO、ETO、MTS等多种业务模式',
+        },
+        {
+            id:'2',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'汽车及零配件',
+            discription:'面向产业链上下游企业的整体数字化解决方案，构建核心竞争力',
+        },
+        {
+            id:'3',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'现代农牧',
+            discription:'农牧企业数字化、智能化、无人化产品服务及全产业链一体化方案',
+        },
+        {
+            id:'4',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'电子半导体',
+            discription:'以数智化转型打造全透明可视工厂，我提升制程良率优势与成本优势',
+        },
+        {
+            id:'5',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'医药流通',
+            discription:'面向医药批发采、供、销业财一体化，提升全业务链条的数字化管控',
+        },
+        {
+            id:'6',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'建筑行业',
+            discription:'实现项目全生命周期多层级协同管理，降低项目风险',
+        },
+        {
+            id:'7',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'钢铁冶金',
+            discription:'覆盖炼铁、炼钢轧钢、金属加工和钢贸业态，助力企业降本增效',
+        },
+        {
+            id:'8',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'制药行业',
+            discription:'实现研产销及GMP合规管控体化运营，提升企业经营管理效率',
+        },
+        
+    ]
+
+    const slideList2 = [
+        {
+            id:'1',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'能源与资源',
+            discription:'构建企业“节能降耗、降本增效、智能制造、管理提升”的解决方案',
+        },
+        {
+            id:'2',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'房地产',
+            discription:'帮助房地产行业实现人财税精细化管理，重塑企业核心竞争力',
+        },
+        {
+            id:'3',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'食品饮料',
+            discription:'提供预业财人资税精益管理，食安追踪与溯源等数字化解决方案',
+        },
+        {
+            id:'4',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'交通与物流',
+            discription:'助力客户转换管理模式，赋能企业数字化转型',
+        },
+        {
+            id:'5',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'日化用品',
+            discription:'构建以IPD体系为核心的产品创新研发管控体系',
+        },
+        {
+            id:'6',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'流程制造',
+            discription:'聚焦连续性生产特性，提供集成PLM+ERP+MES+BI——体化解决方案',
+        },
+        {
+            id:'7',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'住宿餐饮',
+            discription:'为餐饮企业建设集团化业务与管控平台，扫提升效率降低风险',
+        },
+        {
+            id:'8',
+            href:'#',
+            bkImg: hotSpot1,
+            logoImg: logo,
+            name:'批发与零售',
+            discription:'帮助零售企业构建“人、货场”全新体系，实现全面提升',
+        },
+    ]
+    
+    let showSlide = ref(true);
+    const nextSlide = () => {
+        showSlide.value = false;
+        console.log(showSlide.value);
+    }
+    const prevSlide = () => {
+        showSlide.value = true;
+        console.log(showSlide.value);
+    }
+    // console.log(showSlide.value);
 
     
 </script>
@@ -2194,9 +2543,9 @@ import { debounce, throttle } from 'lodash'
                             transition: all 0.2s ease-in-out;
                         }
                         // border-bottom动画
-                        &:hover .line{
+                        .hover-line{
                             width: 100%;
-                            left: 0;
+                            left:0;
                         }
                     }    
                 }
@@ -2236,7 +2585,7 @@ import { debounce, throttle } from 'lodash'
                            
                         }
                         
-                        .left_item_text:hover{
+                        .left_item_text_hover{
                             background-color: white;
                             color: rgb(0, 104, 221);
                         }
@@ -2924,9 +3273,15 @@ import { debounce, throttle } from 'lodash'
         // 热点关注
         .content_hotSpot{
             margin: 70px 0 0 120px;
+            // margin: 370px 0 0 120px;
             width: 85%;
             height: 303px;
             overflow: hidden;
+
+            // 第一次加载动画
+            animation-duration: 1s;
+            animation-name: slidein;
+
             // div
             .hotSpot{
                 width: 353px;
@@ -2955,9 +3310,6 @@ import { debounce, throttle } from 'lodash'
                             height: 310px;
                             transition: all 0.5s ease 0s;
                             overflow: hidden;
-                        }
-                        .hotSpot_img:hover{
-                            transform: scale(1.1);
                         }
                     }
 
@@ -3002,6 +3354,9 @@ import { debounce, throttle } from 'lodash'
                     }
                     
                 }
+                .hotSpot_box:hover .hotSpot_imgBox .hotSpot_img{
+                    transform: scale(1.1);
+                }
                 .hotSpot_box:hover .hotSpot_text_box .hotSpot_text .hotSpot_moreBox{
                     color: rgb(33, 131, 233);
                 }
@@ -3010,13 +3365,24 @@ import { debounce, throttle } from 'lodash'
                 }
             }
         }
+        // 第一次加载时向上滑的动画
+        @keyframes slidein {
+            from {
+                margin-top: 370px;
+            }
+
+            to {
+                margin-top: 70px;
+            }
+        }
 
         // 金蝶云产品
         .content_cloudpro{
             width: 100%;
             height: 785px;
             padding: 100px 0 70px 0;
-            .wraper{
+
+            .wrapper{
                 margin: 0 9%;
             }
 
@@ -3078,12 +3444,11 @@ import { debounce, throttle } from 'lodash'
             // 内容部分
             .content_cloudpro_cont{
                 width: 1100px;
-                transition: all 1s ease-in-out;
-                background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);  
                 
                 .content_cloudpro_cont_box{
                     width: 1100px;
                     position: relative;
+                    // opacity: 0.1;
                     // 左侧内容
                     .cont_box_left{
                         width: 46.91%;
@@ -3269,6 +3634,271 @@ import { debounce, throttle } from 'lodash'
                                     color: rgb(33, 131, 233);
                                 }
                             }
+                        }
+                    }
+                }
+            }
+
+            // content_cloudpro_cont_box每次v-show出现时一闪而过的光影效果
+            .blink-enter-active,
+            .blink-leave-active {
+                transition: opacity 0.2s ease;
+            }
+            .blink-enter-from,
+            .blink-leave-to {
+                opacity: 0;
+            }
+        }
+
+        // 中国的软件
+        .content_sorft{
+            width: 100%;
+            // width: 1440px;
+            height: 464px;
+            padding: 100px 0 60px 0;
+            background-color: rgb(245, 245, 245);
+
+            .wrapper{
+                // width: 80%;
+                // margin: 0 170px;
+                margin: 0 12.5%;
+
+                .title{
+                    .title_text{
+                        font-size: 34px;
+                        line-height: 51px;
+                        color: rgb(37, 43, 58);
+                        font-weight: 800;
+                        text-align: center;
+                    }
+                }
+
+                // 数据
+                .content_number{
+                    // width: 1100px;
+                    .number_cont{
+                        // ul
+                        .number_list{
+                            // li
+                            .number_item{
+                                padding: 50px 0 70px 0;
+                                display: inline-block;
+                                width: 33.33%;
+                                // border: 1px solid rgb(227, 74, 23);
+                                vertical-align: middle;
+
+                                .number_box{
+                                    text-align: center;
+                                    border-right: 1px solid rgba(133, 154, 184, 0.3);
+
+                                    .number_num{
+                                        font-size: 52px;
+                                        line-height: 78px;
+                                        color: rgb(33, 131, 233);
+                                        display: inline-block;
+                                    }
+
+                                    .number_unit{
+                                        font-size: 38px;
+                                        line-height: 57px;
+                                        color: rgb(33, 131, 233);
+                                        display: inline-block;
+                                    }
+
+                                }
+                                .number_text_top{
+                                    text-align: center;
+                                    font-size: 18px;
+                                    line-height: 22px;
+                                    color: rgb(37, 43, 58);
+                                }
+                                .number_text_bottom{
+                                    text-align: center;
+                                    font-size: 18px;
+                                    line-height: 22px;
+                                    color: rgb(37, 43, 58);
+                                }
+                            }
+                            .number_item:nth-of-type(3) .number_box{
+                                border: none;
+                            }
+                        }
+                    }
+                }
+
+                // 奖项
+                .content_prize{
+                    padding: 40px 0 20px 0; 
+                    border-top: 1px solid rgba(133, 154, 184, 0.3);
+                    // height: 130px;
+                    margin: 0 -5%;
+                    .prize_cont{
+                        
+                        // ul
+                        .prize_list{
+                            // margin: 0 -5%;
+                            // li
+                            .prize_item{
+                                margin-right: 20px;
+                                display: inline-block;
+                                // position: relative;
+
+                                .prize_img{
+                                    // position: absolute;
+
+                                    .img{
+                                        width: 204px;
+                                        height: 100px;
+                                    }
+                                }
+                                .prize_text{
+                                    // position: absolute;
+                                    // text-align: center;
+                                    margin-top: -100px;
+
+                                    .title{
+                                        text-align: center;
+                                        font-size: 15px;
+                                        line-height: 22.5px;
+                                        color: rgb(37, 43, 58);
+                                        padding: 10px 0;
+                                        width: 160px;
+                                        margin-left: 21.5px;
+                                        margin-bottom: 10px;
+                                        border-bottom: 1px solid rgba(133, 154, 184, 0.3);
+                                    }
+                                    .discription{
+                                        text-align: center;
+
+                                        .discription_text{
+                                            font-size: 15px;
+                                            line-height: 22.5px;
+                                            color: rgb(37, 43, 58);
+                                            font-weight: 460;
+                                        }
+                                        .discription_name{
+                                            font-size: 15px;
+                                            line-height: 22.5px;
+                                            color: rgb(37, 43, 58);
+                                            font-weight: 460;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 行业列表
+        .content_industry{
+            width: 100%;
+            height: 812px;
+            padding-top: 100px;
+            .wrapper{
+                margin: 0 9.55%;
+
+                .industry_title{
+                    font-size: 34px;
+                    line-height: 51px;
+                    color: rgb(37, 43, 58);
+                    font-weight: 460;
+                    margin-bottom: 40px;
+                }
+
+                .content_cont{
+                    margin: 0 -5%;
+                    position: relative;
+                    
+                    // 行业内容box
+                    .swiper_wrapper{
+                        // background-color: lightblue;
+                        // margin: 0 5%;
+                        // div
+                        .swiper_slide{
+                            display: inline-block;
+                            height: 320px;
+                            vertical-align: middle;
+                            width: 20%;
+                            margin: 0 30px 30px 30px;
+                            // a
+                            .slide{
+                                display: inline-block;
+
+                                .img{
+                                    img{
+                                        width: 252px;
+                                        height: 320px;
+                                        border-radius: 20px;
+                                    }
+                                    
+                                }
+                                .title{
+                                    margin: -230px 0 0 23px;
+                                    // margin: -250px 0 0 23px;
+                                    text-align: center;
+                                    width: 202px;
+                                    // height: 170px;
+                                    height: 150px;
+                                    overflow: hidden;
+                                    transition: all 0.3s ease-in-out;
+
+                                    .title_img{
+                                        // width: 128px;
+                                        width: 98px;
+                                        height: 98px;
+                                    }
+                                    .title_name{
+                                        font-size: 24px;
+                                        line-height: 36px;
+                                        color: rgb(255, 255, 255);
+                                        margin-top: 12px;
+                                        
+                                    }
+                                    .title_dis{
+                                        font-size: 14px;
+                                        line-height: 21px;
+                                        color: rgb(255, 255, 255);
+                                        width: 202px;
+                                    }
+                                }
+                            }
+                            .slide:hover .title{
+                                margin: -270px 0 0 23px;
+                                height: 220px;
+                                
+                            }
+                        }
+                    }
+
+                    // 右按钮
+                    .swiper_button_next{
+                        display: inline-block;
+                        position: absolute;
+                        right: 0;
+                        top: 283px;
+                        margin-right: -100px;
+                        cursor: pointer;
+
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgb(19, 120, 228);
+                        }
+                    }
+                    // 左按钮
+                    .swiper_button_prev{
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 283px;
+                        margin-left: -100px;
+                        cursor: pointer;
+                        transform: rotate(0.5turn);
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgb(19, 120, 228);
+                            // transform: rotate(0.5turn);
                         }
                     }
                 }
