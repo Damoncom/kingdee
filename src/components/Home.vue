@@ -645,54 +645,312 @@
                             <br>
                             与领军企业共创行业新功能
                         </h2>
-                        <div class="content_cont">
-                            <div class="swiper_wrapper">
-                                <!-- slide1 -->
-                                <div class="swiper_slide"
-                                    v-for="(slide,slide_index) of slideList1"
-                                    :key="slide_index"
-                                    v-show="showSlide == true"
-                                >
-                                    <a :href="slide.href" class="slide">
-                                        <div class="img">
-                                            <img :src="slide.bkImg" alt="">
-                                        </div>
-                                        <div class="title">
-                                            <img :src="slide.logoImg" class="title_img">
-                                            <h2 class="title_name">{{ slide.name }}</h2>
-                                            <div class="title_dis">{{ slide.discription }}</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- slide2 -->
-                                <div class="swiper_slide"
-                                    v-for="(slide,slide_index) of slideList2"
-                                    :key="slide_index"
-                                    v-show="showSlide == false"
-                                >
-                                    <a :href="slide.href" class="slide">
-                                        <div class="img">
-                                            <img :src="slide.bkImg" alt="">
-                                        </div>
-                                        <div class="title">
-                                            <img :src="slide.logoImg" class="title_img">
-                                            <h2 class="title_name">{{ slide.name }}</h2>
-                                            <div class="title_dis">{{ slide.discription }}</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="swiper_button_next" @click="nextSlide">
+                        <!-- :navigation="{
+                            hideOnClick: true
+                        }" -->
+                        <swiper-container 
+                            ref="swiper"
+                            class="content_cont"
+                            :space-between="spaceBetween"
+                            :centered-slides="true"
+                            :pagination="{
+                                hideOnClick: true
+                            }"
+                        >
+                            <div @click="prevSlide" class="prevDiv">
                                 <i class="iconfont icon-jiantou2"></i>
                             </div>
-                            <div class="swiper_button_prev" @click="prevSlide">
+                            <div @click="nextSlide" class="nextDiv">
                                 <i class="iconfont icon-jiantou2"></i>
                             </div>
+                            <!-- slide1 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of slideList1"
+                                        :key="slide_index"                
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <img :src="slide.bkImg" alt="">
+                                            </div>
+                                            <div class="title">
+                                                <img :src="slide.logoImg" class="title_img">
+                                                <h2 class="title_name">{{ slide.name }}</h2>
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                            <!-- slide2 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of slideList2"
+                                        :key="slide_index"
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <img :src="slide.bkImg" alt="">
+                                            </div>
+                                            <div class="title">
+                                                <img :src="slide.logoImg" class="title_img">
+                                                <h2 class="title_name">{{ slide.name }}</h2>
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                        </swiper-container>
+                    </div>
+                </div>
+
+                <!-- 公司列表 -->
+                <div class="content_bank">
+                    <div class="wrapper">
+                        <h2 class="bank_title">
+                            成就客户
+                            <br>
+                            做成功企业背后的软件公司
+                        </h2>
+                        <!-- :navigation="{
+                            hideOnClick: true
+                        }" -->
+                        <swiper-container 
+                            ref="swiper"
+                            class="content_cont"
+                            :space-between="spaceBetween"
+                            :centered-slides="true"
+                            :pagination="{
+                                hideOnClick: true
+                            }"
+                        >
+                            <div @click="prevSlide" class="prevDiv">
+                                <i class="iconfont icon-jiantou2"></i>
+                            </div>
+                            <div @click="nextSlide" class="nextDiv">
+                                <i class="iconfont icon-jiantou2"></i>
+                            </div>
+                            <!-- slide1 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of bankSlideList1"
+                                        :key="slide_index"                
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <img :src="slide.bkImg" class="cont">
+                                                <!-- <video class="cont"
+                                                    ref="videoRef"
+                                                    :src="videoUrl"
+                                                    width="100%"
+                                                    height="224"
+                                                    autoplay
+                                                    controls
+                                                    @timeupdate="handleTimeUpdate"
+                                                >
+                                                </video> -->
+                                                <img src="@/assets/index_video.png" class="logo">
+                                            </div>
+                                            <div class="title">
+                                                <img :src="slide.logoImg" class="title_img">
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                                <div class="more_box">
+                                                    <a href="#" class="title_more">案例详情</a>
+                                                    <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                            <!-- slide2 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of bankSlideList2"
+                                        :key="slide_index"
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <!-- <img :src="slide.bkImg" class="cont"> -->
+                                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=1106258573&bvid=BV1Uw4m1r7i1&cid=1622004858&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="cont"></iframe>
+                                                <img src="@/assets/index_video.png" class="logo">
+                                            </div>
+                                            <div class="title">
+                                                <img :src="slide.logoImg" class="title_img">
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                                <div class="more_box">
+                                                    <a href="#" class="title_more">案例详情</a>
+                                                    <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                        </swiper-container>
+                    </div>
+                </div>
+
+                <!-- 轮播图 -->
+                <!-- <scrollImg /> -->
+
+                <!-- 资料下载 -->
+                <div class="content_material">
+                    <div class="wrapper">
+                        <h2 class="material_title">
+                            金蝶洞察
+                        </h2>
+                        <!-- :navigation="{
+                            hideOnClick: true
+                        }" -->
+                        <swiper-container 
+                            ref="swiper"
+                            class="content_cont"
+                            :space-between="spaceBetween"
+                            :centered-slides="true"
+                            :pagination="{
+                                hideOnClick: true
+                            }"
+                        >
+                            <div @click="prevSlide" class="prevDiv">
+                                <i class="iconfont icon-jiantou2"></i>
+                            </div>
+                            <div @click="nextSlide" class="nextDiv">
+                                <i class="iconfont icon-jiantou2"></i>
+                            </div>
+                            <!-- slide1 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of materialSlideList1"
+                                        :key="slide_index"                
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <img src="@/assets/Settings.svg" class="logo">
+                                            </div>
+                                            <div class="title">
+                                                <h2 class="title_name">{{ slide.name }}</h2>
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                                <div class="more_box">
+                                                    <a href="#" class="title_more">下载白皮书</a>
+                                                    <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                            <!-- slide2 -->
+                            <swiper-slide>
+                                <div class="swiper_wrapper">
+                                    <div class="swiper_slide"
+                                        v-for="(slide,slide_index) of materialSlideList2"
+                                        :key="slide_index"
+                                    >
+                                        <a :href="slide.href" class="slide">
+                                            <div class="img">
+                                                <img src="@/assets/Settings.svg" class="logo">
+                                            </div>
+                                            <div class="title">
+                                                <h2 class="title_name">{{ slide.name }}</h2>
+                                                <div class="title_dis">{{ slide.discription }}</div>
+                                                <div class="more_box">
+                                                    <a href="#" class="title_more">下载白皮书</a>
+                                                    <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </swiper-slide>
+                        </swiper-container>
+                    </div>
+                </div>
+
+                <!-- 疑问 -->
+                <div class="content_yiwen">
+                    <div class="wrapper">
+                        <div class="info">
+                            <h2 class="info_title">欢迎垂询</h2>
+                            <div class="info_text">
+                                请联系我们专业的销售顾问,
+                                <br>
+                                我们将推荐适合您需求的产品或解决方案
+                            </div>
+                            <div class="info_connect">
+                                <div class="qr">
+                                    <img src="@/assets/qr.jpg" class="qr_img">
+                                </div>
+                                <div class="qr_intro">
+                                    扫码获取一对一服务
+                                    <br>
+                                    或致电 4008-830-830
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img">
+                            <img src="@/assets/people.jpg">
                         </div>
                     </div>
                 </div>
 
+                <!-- 评分 -->
+                <div class="content_score">
+                    <div class="text">该页面是否满足您的需求？</div>
+                    <div class="dianzan">
+                        <i class="iconfont icon-dianzan_kuai"></i>
+                    </div>
+                    <div class="cai">
+                        <i class="iconfont icon-dianzan_kuai"></i>
+                    </div>
+                </div>
+            </div>
 
+            <!-- footer部分 -->
+            <div class="footer_content">
+                <div class="wrapper">
+                    <!-- 左侧 -->
+                    <div class="footer_left">
+                        <div class="logo">
+                            <img src="@/assets/logohei.gif">
+                        </div>
+                        <div class="consult">售前咨询热线</div>
+                        <div class="phone">4008-830-830</div>
+                        <div class="consult">售后服务热线</div>
+                        <div class="phone">4008-830-830</div>
+                        <div class="focus">关注金蝶</div>
+                        <div class="img">
+                            <i class="iconfont icon-weixin"></i>
+                            <i class="iconfont icon-weibo"></i>
+                            <i class="iconfont icon-shejiaotubiao-46"></i>
+                        </div>
+                    </div>
+                    <!-- 右侧 -->
+                    <div class="footer_right">
+                        <ul class="title_list">
+                            <li class="title_item"
+                                v-for="(title,title_index) of titleList"
+                                :key="title_index"
+                            >
+                                <p class="title">{{ title.name }}</p>
+                                <ul class="detail_list">
+                                    <li class="detail_item"
+                                        v-for="(detail,detail_index) of title.detailList"
+                                        :key="detail_index"
+                                    >
+                                    <a :href="detail.href" class="detail">{{ detail.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -713,6 +971,7 @@ import hotSpot1 from '@/assets/hotspot1.jpg'
 import hotSpot2 from '@/assets/hotspot2.jpg'
 import hotSpot3 from '@/assets/hotspot3.jpg'
 import logo from '@/assets/Settings.svg'
+import scrollImg from './test.vue'
 // import NumberAnimation from "vue-number-animation";
 import { Icon } from 'vant'
 
@@ -723,6 +982,53 @@ import 'simplebar-vue/dist/simplebar.min.css'
 // 防抖和节流
 import { debounce, throttle } from 'lodash'
 
+// 引入swiper
+import { register } from 'swiper/element/bundle'
+
+register();
+
+    // 翻页
+    const spaceBetween = 10;
+    const onProgress = (e) => {
+        const [swiper,progress] = e.detail;
+        console.log(progress)
+    };
+    const onSlideChange = (e) => {
+        console.log('slide changed')
+    }
+
+    // const onProgress1 = (e) => {
+    //     const [swiper,progress] = e.currentTarget.parentElement.detail;
+    //     console.log(progress)
+    // };
+    // const onSlideChange1 = (e) => {
+    //     console.log('slide changed')
+    // }
+
+
+    let swiper = ref(null);
+    const prevSlide = () => {
+        swiper.slideNext()
+    }
+    const nextSlide = () => {
+        swiper.slidePrev()
+    }
+    
+   
+    // 播放视频
+    //播放
+    // const data = ref([
+    //     {
+    //         baseUrl:'https://www.bilibili.com/video/BV1ey411e7Wg/?spm_id_from=333.1007.tianma.2-2-4.click&vd_source=324c4fd6b362e7c5749bc7f823dc6fcb'
+    //     }
+    // ])
+    // const handlePlayVideo = (data) => {
+    //     videoUrl.value = data?.baseUrl;
+    // };
+    //下载
+    // const handleDownload = (data) => {
+    // window.open(data?.baseUrl, "_blank");
+    // };
 
 
     // 语言选择、登录、注册  
@@ -1812,25 +2118,16 @@ import { debounce, throttle } from 'lodash'
 
     // 导航栏显示-------------
     // 一级导航栏的显示
-    // let headerNavShow = ref(false);
     const hoverNav = () => {
-        // headerNavShow.value = true;
     }
     const notHoverNav = () => {
-        // headerNavShow.value = false;
         navActiveIndex.value = -1;
     }
     // 一级导航栏-->二级导航栏
     let navActiveIndex = ref(-1);
     let hoverNavIndex;
     let navClassName;
-    // const navListEventAgent = (event) => {
-    //     hoverNavIndex = event.target.dataset.index;
-    //     navClassName = event.target.className;
-    //     if( +hoverNavIndex != NaN && navClassName == 'nav_item_text'){
-    //         navActiveIndex.value = +hoverNavIndex;
-    //     }
-    // }
+ 
     const navListEventAgent = debounce((event) => {
         hoverNavIndex = event.target.dataset.index;
         navClassName = event.target.className;
@@ -2206,28 +2503,59 @@ import { debounce, throttle } from 'lodash'
 
 
     // 中国的软件数据
-    const numberList = [
+    let numberList = ref([
         {
             id:'1',
-            num:'740',
+            num:0,
+            targetNum:740,
             unit:'万+',
             textTop:'服务的企业、组织机构客户数量',
+            textBottom:'',
+            timer:null,
+            step:20,
+            steptTime:1,
+            toFixed:0,
         },
         {
             id:'2',
-            num:'51.2',
+            num:0.0,
+            targetNum:51.2,
             unit:'%',
             textTop:'服务超过一半中国500强',
-            textBottom:'已成为500强企业新选择'
+            textBottom:'已成为500强企业新选择',
+            timer:null,
+            step:0.9,
+            steptTime:1,
+            toFixed:1,
         },
         {
             id:'3',
-            num:'43',
+            num:0,
+            targetNum:43,
             unit:'%',
             textTop:'服务专精特新企业',
-            textBottom:'助力中国新经济和智能制造'
+            textBottom:'助力中国新经济和智能制造',
+            timer:null,
+            step:1,
+            steptTime:1,
+            toFixed:0,
         },
-    ]
+    ])
+    // 数字从0开始调到targetNum的动画
+    onMounted(async() => {
+        await nextTick();
+        numberList.value.forEach((item) => {
+            item.timer = setInterval(() => {
+                item.num = (+item.num + item.step).toFixed(item.toFixed);
+                if(item.num >= item.targetNum){
+                    item.num = item.targetNum;
+                    clearInterval(item.timer);
+                }
+            },item.steptTime)
+        })
+    })
+    
+
     
     const prizeList = [
         {
@@ -2261,23 +2589,6 @@ import { debounce, throttle } from 'lodash'
             name:'IDC',
         },
     ]
-
-    // let finalNum = numberList[1].num;
-    // let count = ref(0);
-    // let timer = setInterval(() => {
-    //     count.value++;
-    //     if(count.value > finalNum){
-    //         // 避免count大于finalNum最终数字显示不对
-    //         count.value = finalNum
-    //         // 清空定时器
-    //         clearInterval(timer)
-    //         timer = null
-    //     }
-    //     // console.log(count.value);
-    // },1)
-    // // 每1ms实现一次递增
-    // console.log(numberList[1].num);
-    // // let num = document.getElementsByName(number_num).contentText;
 
 
     // 行业列表
@@ -2415,17 +2726,302 @@ import { debounce, throttle } from 'lodash'
             discription:'帮助零售企业构建“人、货场”全新体系，实现全面提升',
         },
     ]
+
+    // 公司列表
+    const bankSlideList1 = [
+        {
+            id:'1',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'温氏集团20多年前就和金蝶开展信息化合作，做到了“从农场到餐桌”的全程监管，开启产业互联网新玩法',
+        },
+        {
+            id:'2',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'金蝶s-HR通过数据驱动的能力，打造了国贸股份新EBC信息平台，以50个业务组织，1021个组织协同管理，助力国贸股份数字化战略',
+        },
+        {
+            id:'3',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'钢铁企业的生产环节是制造业当中比较复杂的，更需要数字化的赋能来解决很多人为达不到或人为能达到但效果不好的问题',
+        },
+    ]
+    const bankSlideList2 = [
+        {
+            id:'1',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'钢铁企业的生产环节是制造业当中比较复杂的，更需要数字化的赋能来解决很多人为达不到或人为能达到但效果不好的问题',
+        },
+        {
+            id:'2',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'金蝶s-我们对民族品牌坚定不移的支持，也希望通过与金蝶的合作，能够为国产软件在制造业管理方面建立品牌。依托金蝶云，服务全球客户',
+        },
+        {
+            id:'3',
+            href:'#',
+            bkImg: hotSpot2,
+            logoImg: supply,
+            discription:'与金蝶长达八年的合作我们建立了深厚的友谊，金蝶陪伴百瑞源一路成长，帮助我们从一家传统农产品加工型企业，逐渐转型到数字化企业',
+        },
+    ]
+
+    // 资源下载
+    const materialSlideList1 = [
+        {
+            id:'1',
+            href:'#',
+            name:'数字员工能为您的企业做什么',
+            discription:'《财务数字员工白皮书》',
+        },
+        {
+            id:'2',
+            href:'#',
+            name:'如何加快推进国资数字化转型',
+            discription:'《国资国企数字转型蓝皮书》',
+        },
+        {
+            id:'3',
+            href:'#',
+            name:'30分钟读懂装备制造业数字化转型',
+            discription:'《装备制造业数字化转型白皮书》',
+        },
+    ]
+    const materialSlideList2 = [
+        {
+            id:'1',
+            href:'#',
+            name:'数字化如何助力生命科学产业',
+            discription:'《生命科学产业数字化转型白皮书》',
+        },
+        {
+            id:'2',
+            href:'#',
+            name:'光伏行业如何从全球销售走向全球运营',
+            discription:'《光伏行业数字化联合白皮书》',
+        },
+        {
+            id:'3',
+            href:'#',
+            name:'数字化如何赋能地产企业应对机遇与挑战',
+            discription:'《不动产产业数字化转型白皮书》',
+        },
+    ]
     
-    let showSlide = ref(true);
-    const nextSlide = () => {
-        showSlide.value = false;
-        console.log(showSlide.value);
-    }
-    const prevSlide = () => {
-        showSlide.value = true;
-        console.log(showSlide.value);
-    }
-    // console.log(showSlide.value);
+
+    // footer数据
+    const titleList = [
+        {
+            id:'1',
+            name:'为什么选择金蝶',
+            detailList:[
+                {
+                    id:'1-1',
+                    name:'了解金蝶',
+                    href:'#',
+                },
+                {
+                    id:'1-2',
+                    name:'金蝶荣誉',
+                    href:'#',
+                },
+                {
+                    id:'1-3',
+                    name:'投资者关系',
+                    href:'#',
+                },
+                {
+                    id:'1-4',
+                    name:'客户案例',
+                    href:'#',
+                },
+                {
+                    id:'1-5',
+                    name:'新闻动态',
+                    href:'#',
+                },
+                {
+                    id:'1-6',
+                    name:'联系我们',
+                    href:'#',
+                },
+            ]
+        },
+        {
+            id:'2',
+            name:'产品',
+            detailList:[
+                {
+                    id:'2-1',
+                    name:'财务云',
+                    href:'#',
+                },
+                {
+                    id:'2-2',
+                    name:'税务云',
+                    href:'#',
+                },
+                {
+                    id:'2-3',
+                    name:'人力云',
+                    href:'#',
+                },
+                {
+                    id:'2-4',
+                    name:'企业级AI平台',
+                    href:'#',
+                },
+                {
+                    id:'2-5',
+                    name:'大型企业SaaS管理',
+                    href:'#',
+                },
+                {
+                    id:'2-6',
+                    name:'成长型企业EBC',
+                    href:'#',
+                },
+                {
+                    id:'2-7',
+                    name:'小型企业SaaS管理',
+                    href:'#',
+                },
+            ]
+        },
+        {
+            id:'3',
+            name:'解决方案',
+            detailList:[
+                {
+                    id:'3-1',
+                    name:'装备制造',
+                    href:'#',
+                },
+                {
+                    id:'3-2',
+                    name:'建筑行业',
+                    href:'#',
+                },
+                {
+                    id:'3-3',
+                    name:'汽配行业',
+                    href:'#',
+                },
+                {
+                    id:'3-4',
+                    name:'电子半导体',
+                    href:'#',
+                },
+                {
+                    id:'3-5',
+                    name:'医药流通',
+                    href:'#',
+                },
+                {
+                    id:'3-6',
+                    name:'现代农牧',
+                    href:'#',
+                },
+                {
+                    id:'3-7',
+                    name:'钢铁冶金',
+                    href:'#',
+                },
+            ]
+        },
+        {
+            id:'4',
+            name:'服务支持',
+            detailList:[
+                {
+                    id:'4-1',
+                    name:'客户成功体系',
+                    href:'#',
+                },
+                {
+                    id:'4-2',
+                    name:'服务产品与方案',
+                    href:'#',
+                },
+                {
+                    id:'4-3',
+                    name:'正版验证',
+                    href:'#',
+                },
+                {
+                    id:'4-4',
+                    name:'盗版举报',
+                    href:'#',
+                },
+                {
+                    id:'4-5',
+                    name:'产品生命周期',
+                    href:'#',
+                },
+                {
+                    id:'4-6',
+                    name:'产品安全',
+                    href:'#',
+                },
+                {
+                    id:'4-7',
+                    name:'产品及服务条款',
+                    href:'#',
+                },
+            ]
+        },
+        {
+            id:'5',
+            name:'快速连接',
+            detailList:[
+                {
+                    id:'5-1',
+                    name:'2023全球创见者大会',
+                    href:'#',
+                },
+                {
+                    id:'5-2',
+                    name:'什么是ERP',
+                    href:'#',
+                },
+                {
+                    id:'5-3',
+                    name:'新手课堂',
+                    href:'#',
+                },
+                {
+                    id:'5-4',
+                    name:'学习与成长',
+                    href:'#',
+                },
+                {
+                    id:'5-5',
+                    name:'资料下载',
+                    href:'#',
+                },
+                {
+                    id:'5-6',
+                    name:'查找经销商',
+                    href:'#',
+                },
+                {
+                    id:'5-7',
+                    name:'咨询专栏',
+                    href:'#',
+                },
+            ]
+        },
+    ]
+    
 
     
 </script>
@@ -3132,6 +3728,7 @@ import { debounce, throttle } from 'lodash'
     // 内容部分
     .content_content{
         // margin-left: 130px;
+        position: relative;
 
         // 大标题、介绍、方案详情按钮
         .content_introduction{
@@ -3277,10 +3874,11 @@ import { debounce, throttle } from 'lodash'
             width: 85%;
             height: 303px;
             overflow: hidden;
+            // position: absolute;
 
-            // 第一次加载动画
-            animation-duration: 1s;
-            animation-name: slidein;
+            // // 第一次加载动画
+            // animation-duration: 1s;
+            // animation-name: slidein;
 
             // div
             .hotSpot{
@@ -3291,6 +3889,10 @@ import { debounce, throttle } from 'lodash'
                 border-radius: 20px; 
                 overflow: hidden;
                 white-space: nowrap;
+                // 第一次加载动画
+                animation-duration: 3s;
+                animation-name: slidein;
+                // margin-top: 300px;
 
                 // a
                 .hotSpot_box{
@@ -3368,11 +3970,11 @@ import { debounce, throttle } from 'lodash'
         // 第一次加载时向上滑的动画
         @keyframes slidein {
             from {
-                margin-top: 370px;
+                margin-top: 300px
             }
 
             to {
-                margin-top: 70px;
+                margin-top: 0px;
             }
         }
 
@@ -3808,8 +4410,9 @@ import { debounce, throttle } from 'lodash'
                 }
 
                 .content_cont{
-                    margin: 0 -5%;
+                    margin: 0 -7%;
                     position: relative;
+                    // background-color: lightblue;
                     
                     // 行业内容box
                     .swiper_wrapper{
@@ -3820,8 +4423,8 @@ import { debounce, throttle } from 'lodash'
                             display: inline-block;
                             height: 320px;
                             vertical-align: middle;
-                            width: 20%;
-                            margin: 0 30px 30px 30px;
+                            width: 18%;
+                            margin: 0 20px 30px 53px;
                             // a
                             .slide{
                                 display: inline-block;
@@ -3872,33 +4475,532 @@ import { debounce, throttle } from 'lodash'
                         }
                     }
 
-                    // 右按钮
-                    .swiper_button_next{
-                        display: inline-block;
+                    // 左按钮
+                    .prevDiv{
                         position: absolute;
-                        right: 0;
-                        top: 283px;
-                        margin-right: -100px;
+                        z-index: 999;
+                        left: 32px;
+                        top: 286px;
+                        margin: 0 -5%;
+                        transform: rotate(0.5turn);
                         cursor: pointer;
-
+                        
                         .icon-jiantou2{
                             font-size: 100px;
-                            color: rgb(19, 120, 228);
+                            color: rgb(33, 131, 233);
+                            overflow: visible;
                         }
                     }
-                    // 左按钮
-                    .swiper_button_prev{
-                        display: inline-block;
+                    // 右按钮
+                    .nextDiv{
                         position: absolute;
-                        left: 0;
-                        top: 283px;
-                        margin-left: -100px;
+                        z-index: 999;
+                        right: 32px;
+                        top: 286px;
+                        margin: 0 -5%;
                         cursor: pointer;
-                        transform: rotate(0.5turn);
+                        
                         .icon-jiantou2{
                             font-size: 100px;
-                            color: rgb(19, 120, 228);
-                            // transform: rotate(0.5turn);
+                            color: rgb(33, 131, 233);
+                            overflow: visible;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        // 公司列表
+        .content_bank{
+            width: 100%;
+            height: 812px;
+            padding-top: 100px;
+            .wrapper{
+                margin: 0 9.55%;
+
+                .bank_title{
+                    font-size: 34px;
+                    line-height: 51px;
+                    color: rgb(37, 43, 58);
+                    font-weight: 460;
+                    margin-bottom: 40px;
+                }
+
+                .content_cont{
+                    margin: 0 -5%;
+                    position: relative;
+                    
+                    // 公司内容box
+                    .swiper_wrapper{
+
+                        .swiper_slide{
+                            display: inline-block;
+                            height: 478px;
+                            vertical-align: middle;
+                            width: 27.9%;
+                            // 337
+                            margin: 0 0px 30px 50px;
+                            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+                            border-radius: 20px;
+                            overflow: hidden;
+                            position: relative;
+                            // border: 1px solid yellow;
+
+                            // a
+                            .slide{
+                                display: inline-block;
+                                
+                                .img{
+                                    position: relative;
+                                    .cont{
+                                        width: 100%;
+                                        height: 224px;
+                                    }
+                                    .logo{
+                                        width: 43px;
+                                        height: 30px;
+                                        position: absolute;
+                                        right: 20px;
+                                        bottom: 20px;
+                                    }
+                                }
+                                .title{
+                                    padding: 10px 15px;
+                                    overflow: hidden;
+                                    transition: all 0.3s ease-in-out;
+
+                                    .title_img{
+                                        // width: 128px;
+                                        width: 52px;
+                                        height: 52px;
+                                    }
+                                    .title_dis{
+                                        font-size: 16px;
+                                        line-height: 24px;
+                                        color: rgb(37, 43, 58);
+                                        width: 100%;
+                                        padding-top: 23px; 
+                                    }
+                                    .more_box{
+                                        height: 40px;
+                                        margin-top: 40px;
+
+                                        .title_more{
+                                            font-size: 14px;
+                                            line-height: 21px;
+                                            color: rgb(37, 43, 58); 
+                                            position: absolute;
+                                            bottom: 20px;
+                                        }
+                                        .title_arrow{
+                                            width: 0px;
+                                            height: 35px;
+                                            position: absolute;
+                                            bottom: 13px;
+                                            left: 80px;
+                                            transition: all 1s ease;
+                                        }
+                                    }
+                                    .more_box:hover .title_more{
+                                        color: rgb(33, 131, 233);
+                                    }
+                                    .more_box:hover .title_arrow{
+                                        width: 35px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 左按钮
+                    .prevDiv{
+                        position: absolute;
+                        z-index: 999;
+                        left: 32px;
+                        top: 286px;
+                        margin: 0 -5%;
+                        transform: rotate(0.5turn);
+                        cursor: pointer;
+                        
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgb(33, 131, 233);
+                            overflow: visible;
+                        }
+                    }
+                    // 右按钮
+                    .nextDiv{
+                        position: absolute;
+                        z-index: 999;
+                        right: 32px;
+                        top: 286px;
+                        margin: 0 -5%;
+                        cursor: pointer;
+                        
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgb(33, 131, 233);
+                            overflow: visible;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+
+        // 轮播图
+
+        // 资料下载
+        .content_material{
+            width: 100%;
+            height: 344px;
+            padding: 100px 0;
+            background-color: rgb(20, 45, 68);
+
+            .wrapper{
+                margin: 0 9.55%;
+
+                .material_title{
+                    font-size: 34px;
+                    line-height: 51px;
+                    color: rgb(255, 255, 255);
+                    font-weight: 460;
+                    margin-bottom: 20px;
+                }
+
+                .content_cont{
+                    margin: 0 -5%;
+                    position: relative;
+                    
+                    // 公司内容box
+                    .swiper_wrapper{
+
+                        .swiper_slide{
+                            display: inline-block;
+                            height: 200px;
+                            vertical-align: middle;
+                            width: 25.65%;
+                            padding: 28px;
+                            // 337
+                            margin: 0 0px 0 30px;
+                            // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
+                            // border-radius: 20px;
+                            overflow: hidden;
+                            position: relative;
+                            background-image: radial-gradient(circle, rgb(6, 35, 165) 0px, rgba(15, 43, 90, 0.1) 100%);
+                            // border: 1px solid yellow;
+
+                            // a
+                            .slide{
+                                display: inline-block;
+                                height: 224px;
+                                
+                                
+                                .img{
+                                    border-right: 1px solid rgba(133, 154, 184, 0.298);
+                                    width: 100%;
+                                    height: 224px;
+                                    .logo{
+                                        width: 73px;
+                                        height: 60px;
+                                        position: absolute;
+                                        right: 50px;
+                                        bottom: 50px;
+                                        opacity:0.4;
+                                    }
+                                }
+                                .title{
+                                    // position: absolute;
+                                    padding: 10px 15px;
+                                    margin-top: -230px;
+                                    overflow: hidden;
+                                    transition: all 0.3s ease-in-out;
+
+                                    
+                                    .title_name{
+                                        font-size: 24px;
+                                        line-height: 36px;
+                                        color: rgb(255, 255, 255);
+                                        margin-top: 0px;
+                                        
+                                    }
+                                    .title_dis{
+                                        font-size: 16px;
+                                        line-height: 24px;
+                                        color: rgb(255, 255, 255);
+                                        width: 100%;
+                                        padding-top: 23px; 
+                                    }
+                                    .more_box{
+                                        height: 40px;
+
+                                        // margin-top: 40px;
+
+                                        .title_more{
+                                            font-size: 14px;
+                                            line-height: 21px;
+                                            color: rgb(33, 131, 233); 
+                                            position: absolute;
+                                            bottom: 20px;
+                                        }
+                                        .title_arrow{
+                                            width: 35px;
+                                            height: 35px;
+                                            position: absolute;
+                                            bottom: 13px;
+                                            left: 120px;
+                                            transition: all 1s ease;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .swiper_slide:nth-of-type(3n+3) .slide .img{
+                            border: none;
+                        }
+                    }
+
+                    // 左按钮
+                    .prevDiv{
+                        position: absolute;
+                        z-index: 999;
+                        left: 32px;
+                        top: 80px;
+                        margin: 0 -5%;
+                        transform: rotate(0.5turn);
+                        cursor: pointer;
+                        
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgba(255, 255, 255, 0.795);
+                            overflow: visible;
+                        }
+                    }
+                    // 右按钮
+                    .nextDiv{
+                        position: absolute;
+                        z-index: 999;
+                        right: 32px;
+                        top: 80px;
+                        margin: 0 -5%;
+                        cursor: pointer;
+                        
+                        .icon-jiantou2{
+                            font-size: 100px;
+                            color: rgb(255, 255, 255, 0.795);
+                            overflow: visible;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+
+        // 疑问
+        .content_yiwen{
+            height:391px;
+            background-color: rgb(245, 252, 255);
+            position: relative;
+
+            .wrapper{
+                margin: 0 12.5%;
+
+                .info{
+                    padding: 50px 0 36px 0;
+                    display: inline-block;
+
+                    .info_title{
+                        margin-bottom: 25px;
+                        font-size: 34px;
+                        line-height: 51px;
+                        color: rgb(33,131,233);
+                    }
+                    .info_text{
+                        margin-bottom: 20px;
+                        font-size: 18px;
+                        line-height: 28.8px;
+                        color: rgb(37,43,58);
+                    }
+                    .info_connect{
+                        .qr{
+                            margin-right: 19px;
+                            display: inline-block;
+                            vertical-align: middle;
+                            .qr_img{
+                                width: 152px;
+                                height: 152px;
+                            }
+                        }
+                        .qr_intro{
+                            font-size: 18px;
+                            line-height: 28.8px;
+                            color: rgb(37,43,58);
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+                .img{
+                    display: inline-block;
+                    position: absolute;
+                    bottom: -2.5px;
+                    right: 60px;
+                    img{
+                        width: 530px;
+                        height: 304px;
+                    }
+                }
+            }
+        }
+
+        // 评分
+        .content_score{
+            padding: 3.55% 0;
+            background-color: rgb(36, 63, 84);
+            .text{
+                font-size: 32px;
+                color: white;
+                display: inline-block;
+                margin-left: 25.6%;
+            }
+            .dianzan{
+                display: inline-block;
+                width: 98px;
+                height: 38px;
+                border: 1px solid white;
+                border-radius: 5px;
+                margin-left: 4.75%;
+                cursor: pointer;
+
+                .icon-dianzan_kuai{
+                    padding: 0 38px;
+                    font-size: 25px;
+                    line-height: 36px;
+                    color: white;
+                }
+            }
+            .cai{
+                display: inline-block;
+                transform: rotate(0.5turn);
+                width: 98px;
+                height: 38px;
+                border: 1px solid white;
+                border-radius: 5px;
+                margin-left: 1.1%;
+                cursor: pointer;
+                
+                .icon-dianzan_kuai{
+                    padding: 0 38px;
+                    font-size: 25px;
+                    line-height: 36px;
+                    color: white;
+                }
+            }
+            
+        }
+
+        // footer部分
+
+    }
+
+    // footer部分
+    .footer_content{
+        background-color: rgb(20, 45, 68);
+        height: 536px;
+        .wrapper{
+            margin: 0 5.9%;
+            padding-top: 38px;
+            margin-bottom: 33px;
+            // 左侧
+            .footer_left{
+                width: 25.6%;
+                height: 303px;
+                display: inline-block;
+                vertical-align: middle;
+                // 307x303
+                .logo{
+                    margin-bottom: 35px;
+                    img{
+                        width: 49.85%;
+                        height: 40px;
+                        // 153x38
+                    }
+                }
+                .consult{
+                    font-size: 14px;
+                    line-height: 21px;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+                .phone{
+                    font-size: 20px;
+                    line-height: 40px;
+                    color: rgb(255, 255, 255);
+                    margin-bottom: 16px;
+                }
+                .focus{
+                    font-size: 14px;
+                    line-height: 21px;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+                .img{
+                    margin-top: 10px;
+                    .icon-weixin{
+                        font-size: 46px;
+                        color: rgba(255, 255, 255, 0.5);
+                        margin-right: 14px;
+                        vertical-align: middle;
+                    }
+                    .icon-weixin:hover{
+                        color: white;
+                    }
+                    .icon-weibo{
+                        font-size: 42px;
+                        color: rgba(255, 255, 255, 0.5);
+                        margin-right: 14px;
+                        vertical-align: middle;
+                    }
+                    .icon-weibo:hover{
+                        color: white;
+                    }
+                    .icon-shejiaotubiao-46{
+                        font-size: 47px;
+                        color: rgba(255, 255, 255, 0.5);
+                        margin-right: 14px;
+                        vertical-align: middle;
+                    }
+                    .icon-shejiaotubiao-46:hover{
+                        color: white;
+                    }
+                }
+            }
+            // 右侧
+            .footer_right{
+                display: inline-block;
+                width: 74%;
+                // vertical-align: middle;
+                // ul
+                .title_list{
+                    // li
+                    .title_item{
+                        display: inline-block;
+                        .title{
+                            margin-bottom: 10px;
+                            font-size: 18px;
+                            line-height: 40px;
+                            color: white;
+                        }
+                        // ul
+                        .detail_list{
+                            // li
+                            .detail_item{
+                                .detail{
+
+                                }
+                            }
                         }
                     }
                 }
@@ -3906,7 +5008,8 @@ import { debounce, throttle } from 'lodash'
         }
     }
 
-    
+
+
 
 
 
