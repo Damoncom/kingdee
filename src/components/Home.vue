@@ -3,6 +3,12 @@
     <div class="content_warp">
         <div class="content">
 
+            <!-- 搜索框 -->
+            <div class="search_box" v-if="isSearch == true">
+                <input type="text" placeholder="请输入关键词">
+                <img src="@/assets/magnifier.svg" class="search_img">
+            </div>
+
             <!-- header部分 -->
             <div class="header_content">
 
@@ -14,6 +20,7 @@
                     <ul class="header_nav_list"
                         @mouseover="navListEventAgent"
                         @mouseleave="notHoverNav"
+                        v-if="isSearch == false"
                     >
                         <li class="header_nav_item"
                             v-for="(item,index) of navData"
@@ -235,14 +242,25 @@
                         </div>
                     </div>
                     <!-- 购买 -->
-                    <div class="header_buy">
+                    <div class="header_buy" 
+                        v-if="isSearch == false"
+                    >
                         <img src="@/assets/phone.svg" alt="call" class="icon">
                         <p class="header_buy_call_number">4008-830-830</p>
                         <a href="#" class="header_buy_button">申请体验</a>
                     </div>
                     <!-- 搜索 -->
                     <a href="#" class="header_search">
-                        <img src="@/assets/magnifier.svg" alt="">
+                        <img src="@/assets/magnifier.svg" 
+                            class="search_img"
+                            v-if="isSearch == false"
+                            @mousedown="search"
+                        >
+                        <img src="@/assets/delete.svg" 
+                            class="search_img"
+                            v-if="isSearch == true"
+                            @mousedown="search"
+                        >
                     </a>
                 </div>
 
@@ -645,9 +663,12 @@
                             <br>
                             与领军企业共创行业新功能
                         </h2>
-                        <!-- :navigation="{
-                            hideOnClick: true
-                        }" -->
+                        <div @click="prevSlide" class="prevDiv">
+                            <i class="iconfont icon-jiantou2"></i>
+                        </div>
+                        <div @click="nextSlide" class="nextDiv">
+                            <i class="iconfont icon-jiantou2"></i>
+                        </div>
                         <swiper-container 
                             ref="swiper"
                             class="content_cont"
@@ -657,12 +678,6 @@
                                 hideOnClick: true
                             }"
                         >
-                            <div @click="prevSlide" class="prevDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
-                            <div @click="nextSlide" class="nextDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
                             <!-- slide1 -->
                             <swiper-slide>
                                 <div class="swiper_wrapper">
@@ -715,11 +730,14 @@
                             <br>
                             做成功企业背后的软件公司
                         </h2>
-                        <!-- :navigation="{
-                            hideOnClick: true
-                        }" -->
+                        <div @click="prevSlide2" class="prevDiv">
+                            <i class="iconfont icon-jiantou2"></i>
+                        </div>
+                        <div @click="nextSlide2" class="nextDiv">
+                            <i class="iconfont icon-jiantou2"></i> 
+                        </div>
                         <swiper-container 
-                            ref="swiper"
+                            ref="swiper2"
                             class="content_cont"
                             :space-between="spaceBetween"
                             :centered-slides="true"
@@ -727,12 +745,6 @@
                                 hideOnClick: true
                             }"
                         >
-                            <div @click="prevSlide" class="prevDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
-                            <div @click="nextSlide" class="nextDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
                             <!-- slide1 -->
                             <swiper-slide>
                                 <div class="swiper_wrapper">
@@ -776,8 +788,7 @@
                                     >
                                         <a :href="slide.href" class="slide">
                                             <div class="img">
-                                                <!-- <img :src="slide.bkImg" class="cont"> -->
-                                                <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=1106258573&bvid=BV1Uw4m1r7i1&cid=1622004858&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="cont"></iframe>
+                                                <img :src="slide.bkImg" class="cont">
                                                 <img src="@/assets/index_video.png" class="logo">
                                             </div>
                                             <div class="title">
@@ -798,6 +809,34 @@
 
                 <!-- 轮播图 -->
                 <!-- <scrollImg /> -->
+                <div class="content_srollImg">
+                    <!-- <ul class="scroll_list">
+                        <li class="scroll_item" 
+                            v-for="(scroll,scroll_index) of scrollList"
+                            :key="scroll_index"
+                        >
+                            <i class="iconfont icon-jiantou2"></i>
+                        </li>
+                    </ul> -->
+                    <div class="scroll_box">
+                        <div class="scroll_item1">
+                            <i class="iconfont icon-shunfengsuyun"></i>
+                        </div>
+                        <div class="scroll_item2">
+                            <i class="iconfont icon-shunfengsuyun"></i>
+                        </div>
+                        <div class="scroll_item3">
+                            <i class="iconfont icon-shunfengsuyun"></i>
+                        </div>
+                        <!-- <div class="scroll_item4">
+                            <i class="iconfont icon-shunfengsuyun"></i>
+                        </div> -->
+                        <div class="scroll_item5">
+                            <i class="iconfont icon-shunfengsuyun"></i>
+                        </div> 
+                    </div>
+                        
+                </div>
 
                 <!-- 资料下载 -->
                 <div class="content_material">
@@ -805,11 +844,14 @@
                         <h2 class="material_title">
                             金蝶洞察
                         </h2>
-                        <!-- :navigation="{
-                            hideOnClick: true
-                        }" -->
+                        <div @click="prevSlide3" class="prevDiv">
+                            <i class="iconfont icon-jiantou2"></i>
+                        </div>
+                        <div @click="nextSlide3" class="nextDiv">
+                            <i class="iconfont icon-jiantou2"></i> 
+                        </div>
                         <swiper-container 
-                            ref="swiper"
+                            ref="swiper3"
                             class="content_cont"
                             :space-between="spaceBetween"
                             :centered-slides="true"
@@ -817,12 +859,6 @@
                                 hideOnClick: true
                             }"
                         >
-                            <div @click="prevSlide" class="prevDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
-                            <div @click="nextSlide" class="nextDiv">
-                                <i class="iconfont icon-jiantou2"></i>
-                            </div>
                             <!-- slide1 -->
                             <swiper-slide>
                                 <div class="swiper_wrapper">
@@ -926,7 +962,12 @@
                         <div class="phone">4008-830-830</div>
                         <div class="focus">关注金蝶</div>
                         <div class="img">
-                            <i class="iconfont icon-weixin"></i>
+                            <i class="iconfont icon-weixin">
+                                <!-- 微信qr -->
+                                <div class="qr">
+                                    <img src="@/assets/qr.jpg" class="qr_img">
+                                </div>
+                            </i>
                             <i class="iconfont icon-weibo"></i>
                             <i class="iconfont icon-shejiaotubiao-46"></i>
                         </div>
@@ -950,8 +991,87 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- 底部 -->
+                    <div class="footer_partner">
+                        <span class="name">金蝶集团 旗下品牌：</span>
+                        <ul class="partner_list">
+                            <li class="partner_item"
+                                v-for="(partner,partner_index) of partnerList"
+                                :key="partner_index"
+                            >
+                                <p class="partner_name">{{ partner.name }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer_site">
+                        <p>@2024金蝶软件(中国)有限公司</p>
+                        <p>粤ICP备05041751号</p>
+                        <p>粤公网安备 44030502002324号</p>
+                        <p class="low">法律声明及隐私政策</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <!-- 售前服务 -->
+                <div class="sidebar_pre">
+                    <div class="pre_img">
+                        <i class="iconfont icon-liaotian"></i>
+                    </div>
+                    <p class="pre_text">售前服务</p>
+
+                    <!-- 售前服务hover出现box -->
+                    <div class="pre_more_box">
+                        <div class="box_top">
+                            <div class="top_img">
+                                <i class="iconfont icon-dadianhua"></i>
+                            </div>
+                            <p class="top_text">官方售前咨询热线</p>
+                            <p class="top_phone">4008-830-830</p>
+                        </div>
+                        <div class="box_bottom">
+                            <div class="bottom_left">
+                                <div class="left_top">
+                                    <div class="img_box">
+                                        <i class="iconfont icon-liaotian"></i>
+                                    </div>
+                                    <div class="text">与我们的售前专家在线聊天</div>
+                                </div>
+                                <div class="left_bottom">在线咨询</div>
+                            </div>
+                            <div class="bottom_right">
+                                <img src="@/assets/qr.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 售后服务 -->
+                <div class="sidebar_after">
+                    <div class="after_img">
+                        <i class="iconfont icon-jishiliaotian"></i> 
+                    </div>
+                    <p class="after_text">售后服务</p>
+                </div>
+                <!-- 个人号 -->
+                <div class="sidebar_self">
+                    <div class="self_img">
+                        <i class="iconfont icon-geren"></i>
+                    </div>
+                    <p class="self_text">
+                        徐少春
+                        <br>
+                        个人号
+                    </p>
+                    <div class="self_more_box">
+                        <img src="@/assets/qr.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 返回顶部按钮 -->
+            <backTop />
+
         </div>
     </div>
 </template>
@@ -972,6 +1092,7 @@ import hotSpot2 from '@/assets/hotspot2.jpg'
 import hotSpot3 from '@/assets/hotspot3.jpg'
 import logo from '@/assets/Settings.svg'
 import scrollImg from './test.vue'
+import backTop from './backtop.vue'
 // import NumberAnimation from "vue-number-animation";
 import { Icon } from 'vant'
 
@@ -1008,10 +1129,44 @@ register();
 
     let swiper = ref(null);
     const prevSlide = () => {
-        swiper.slideNext()
+        swiper.value.swiper.slidePrev(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slidePrev);
     }
     const nextSlide = () => {
-        swiper.slidePrev()
+        swiper.value.swiper.slideNext(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slideNext);
+    }
+
+    let swiper2 = ref(null);
+    const prevSlide2 = () => {
+        swiper2.value.swiper.slidePrev(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slidePrev);
+    }
+    const nextSlide2 = () => {
+        swiper2.value.swiper.slideNext(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slideNext);
+    }
+
+    let swiper3 = ref(null);
+    const prevSlide3 = () => {
+        swiper3.value.swiper.slidePrev(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slidePrev);
+    }
+    const nextSlide3 = () => {
+        swiper3.value.swiper.slideNext(100,() => {
+
+        });
+        console.log(swiper._value.swiper.slideNext);
     }
     
    
@@ -2119,6 +2274,7 @@ register();
     // 导航栏显示-------------
     // 一级导航栏的显示
     const hoverNav = () => {
+        // headerNavShow.value = true;
     }
     const notHoverNav = () => {
         navActiveIndex.value = -1;
@@ -2440,7 +2596,7 @@ register();
         },
         {
             id:'2',
-            num:'300个+',
+            num:'250个+',
             name:'实时跟踪生产任务',
         },
         {
@@ -2513,7 +2669,7 @@ register();
             textBottom:'',
             timer:null,
             step:20,
-            steptTime:1,
+            stepTime:1,
             toFixed:0,
         },
         {
@@ -2525,7 +2681,7 @@ register();
             textBottom:'已成为500强企业新选择',
             timer:null,
             step:0.9,
-            steptTime:1,
+            stepTime:1,
             toFixed:1,
         },
         {
@@ -2537,7 +2693,7 @@ register();
             textBottom:'助力中国新经济和智能制造',
             timer:null,
             step:1,
-            steptTime:1,
+            stepTime:1,
             toFixed:0,
         },
     ])
@@ -2551,7 +2707,7 @@ register();
                     item.num = item.targetNum;
                     clearInterval(item.timer);
                 }
-            },item.steptTime)
+            },item.stepTime)
         })
     })
     
@@ -2774,6 +2930,46 @@ register();
             discription:'与金蝶长达八年的合作我们建立了深厚的友谊，金蝶陪伴百瑞源一路成长，帮助我们从一家传统农产品加工型企业，逐渐转型到数字化企业',
         },
     ]
+
+    // 轮播图
+    // const scrollList = [
+    //     {
+    //         id:'1',
+    //     },
+    //     {
+    //         id:'2',
+    //     },
+    //     {
+    //         id:'3',
+    //     },
+    //     {
+    //         id:'4',
+    //     },
+    //     {
+    //         id:'5',
+    //     },
+    //     {
+    //         id:'6',
+    //     },
+    //     {
+    //         id:'7',
+    //     },
+    //     {
+    //         id:'8',
+    //     },
+    //     {
+    //         id:'9',
+    //     },
+    //     {
+    //         id:'10',
+    //     },
+    //     {
+    //         id:'11',
+    //     },
+    //     {
+    //         id:'12',
+    //     },
+    // ]
 
     // 资源下载
     const materialSlideList1 = [
@@ -3022,7 +3218,74 @@ register();
         },
     ]
     
+    const partnerList = [
+        {
+            id:'1',
+            name:'小微企业云服务平台',
+        },
+        {
+            id:'2',
+            name:'金蝶发票云',
+        },
+        {
+            id:'3',
+            name:'管易云',
+        },
+        {
+            id:'4',
+            name:'车商税',
+        },
+        {
+            id:'5',
+            name:'账无忧',
+        },
+        {
+            id:'6',
+            name:'智慧记',
+        },
+        {
+            id:'7',
+            name:'我家云',
+        },
+        {
+            id:'8',
+            name:'金蝶天燕',
+        },
+        {
+            id:'9',
+            name:'精一教育',
+        },
+        {
+            id:'10',
+            name:'云镝智慧',
+        },
+        {
+            id:'11',
+            name:'金蝶征信',
+        },
+        {
+            id:'12',
+            name:'金蝶信心链',
+        },
+        {
+            id:'13',
+            name:'金蝶星域工业互联网平台',
+        },
+    ]
 
+
+    // 搜索
+    let isSearch = ref(false);
+    let count = ref(0);
+    const search = () => {
+        count.value++
+        if(count.value % 2 === 0 ){
+            isSearch.value = false;
+        }else{
+            isSearch.value = true;
+        }
+        console.log(isSearch.value)
+    }
     
 </script>
 
@@ -3084,19 +3347,29 @@ register();
 
     .header_content{
         position: relative;
-        clear: both;;
+        clear: both;
         line-height: 100px;
+        width: 1440px;
+        margin-left: -40px;
+        height: 105px;
+        // box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+        position: sticky;
+        top: 0px;
+        background-color: white;
+        z-index: 888;
 
         // 金蝶logo
         .header_logo{
             display: inline-block;
-            height: 31.5%;
+            // height: 31.5%;
             // height: 40.3%;
+            height: 47%;
             padding-top: 27px;
-            padding-left: 2.36%;
+            // padding-left: 2.36%;
+            padding-left: 5.1%;
             position: absolute;
             z-index: 999;
-            
+            vertical-align: middle;   
         }
 
         // 导航栏
@@ -3104,8 +3377,8 @@ register();
             display: inline-block;
             height: 100px;
             padding: -20px 0 0 0;
-            margin-left: 15.6%;
-            // margin-left: 19.4%;
+            // margin-left: 15.6%;
+            margin-left: 17.5%;
 
             // 一级导航栏的ul
             .header_nav_list{
@@ -3160,6 +3433,7 @@ register();
                 height: 480px;
                 border-top: 1px solid rgb(229, 232, 237);
                 box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px 0px;
+                z-index: 999;
 
                 // 二级导航栏的ul
                 .header_nav_sec_left{
@@ -3238,12 +3512,12 @@ register();
                                                 width: 50px;
                                                 height: 50px;
                                                 padding-left: 21px;
-                                            
+                                                
                                             }
                                             .right_item_text{
                                                 display: inline-block;
                                                 margin-left: 20px;
-
+                                                vertical-align: top;
                                                 // 三级导航栏的li标题
                                                 .right_item_title_text{
                                                     color: rgb(37, 43, 58);
@@ -3289,9 +3563,11 @@ register();
                                                 // 三级导航栏的前置icon
                                                 .right_item_icon_box{
                                                     display: inline-block;
+                                                    vertical-align: middle;
                                                     .right_item_icon{
                                                         width: 28px;
                                                         height: 28px;
+                                                        
                                                     }
                                                 }
                                                 
@@ -3476,6 +3752,7 @@ register();
                 border-top: 1px solid rgb(229, 232, 237);
                 box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px 0px;
                 background-color: white;
+                z-index: 999;
 
                 // 二级导航栏的ul
                 .header_nav_sec_left{
@@ -3529,7 +3806,7 @@ register();
                                         width: 11px;
                                         height: 11px;
                                         padding-left: 5px;
-                                    
+                                        
                                     }   
                                 }
                             }
@@ -3603,17 +3880,21 @@ register();
 
                 // 地球语言选择下拉
                 .header_language_left{
-                    position: relative;
+                    position: absolute;
+                    top: 0px;
+                    right: 145px;
                     display: inline-block;
                     height: 50px;
+                    // vertical-align: middle;
                     img{
                         width: 26px;
                         height: 26px;
                         padding: 12px;
                         display: inline-block;
                         position: relative;
-                        top: 16px;
+                        top: 20px;
                         margin: 5px 6px 0 0;
+                        
                     }
                     .region{
                         position: absolute;
@@ -3622,7 +3903,7 @@ register();
                         height: 0px;
                         left: 50%;
                         margin-left: -48px;
-                        top: 60px;
+                        top: 65px;
                         font-family: PingFangM, Arial, sans-serif;
                         font-size: 14px;
                         box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px 0px;
@@ -3651,7 +3932,13 @@ register();
                 // 登录和注册
                 .header_loginAndregister_right{
                     display: inline-block;
+                    position: absolute;
+                    width: 100px;
+                    height: 24px;
+                    top: 24px;
+                    right: 19px;
                     padding-right: 26px;
+                    
                     .header_login_right{
                         padding: 0 5px;
                         display: inline-block;
@@ -3659,6 +3946,7 @@ register();
                         font-size: 14px;
                     }
                     span{
+                        display: inline-block;
                         color: rgb(87, 93, 108);
                         font-size: 14px;
                     }
@@ -3712,13 +4000,15 @@ register();
                 display: inline-block;
                 line-height: 40px;
                 height: 40px;
-                img{
+                margin-right: 40px;
+                .search_img{
                     position: relative;
                     top: 18px;
                     width: 23px;
                     height: 23px;
                     padding: 10px 28px;
                     display: inline-block;
+                    cursor: pointer;
                 }
             }
         }
@@ -3734,6 +4024,7 @@ register();
         .content_introduction{
             margin-left: 130px;
             display: inline-block;
+            margin-top: 55px;
             // 大标题
             .content_title{
                 color: rgb(37, 43, 58);
@@ -3753,9 +4044,9 @@ register();
             }
             // 方案详情按钮
             .content_button{
-                margin-top: 56.5px;
+                margin-top: 56px;
                 width: 148px;
-                height: 49px;
+                height: 48px;
                 background-color: rgb(33, 131, 233);
                 border: 1px solid white;
                 border-radius: 5px;
@@ -3768,15 +4059,18 @@ register();
                         display: inline-block;
                         width: 70px;
                         padding-left: 41px; 
-                        line-height: 49px;
+                        line-height: 48px;
                         transition: padding-left 0.3s ease;
                     }
                     .icon{
                         display: inline-block;
                         width: 0px;
                         margin: 0 8px 0 -3px;
+                        line-height: 45px;
+                        vertical-align: top;
                         overflow: hidden;
                         transition: all 0.3s ease;
+                        
                     }
                 }
             }
@@ -3794,7 +4088,7 @@ register();
             position: absolute;
             display: inline-block;
             padding: 10px 50px;
-            margin-top: -63px;
+            vertical-align: top;
             z-index: -1;
             .content_image{
                 width: auto;
@@ -3822,7 +4116,7 @@ register();
                     }
                     .infoNav_title_arrow{
                         position: absolute;
-                        top: 26px;
+                        top: 29px;
                         display: inline-block;
                         padding: 0 20px 0 10px;
 
@@ -3839,7 +4133,7 @@ register();
                     width: 80%;
                     line-height: 1.5;
                     cursor: pointer;
-
+                    vertical-align: middle;
 
                     // li
                     .infoNav_list{
@@ -3850,6 +4144,7 @@ register();
                         border: 1px solid rgb(136, 136, 136);
                         border-radius: 30px;
                         background-color: white;
+                        vertical-align: middle;
                         // a
                         .infoNav_list_title{
                             color: rgb(37, 43, 58);
@@ -4110,6 +4405,8 @@ register();
                                     display: inline-block;
                                     width: 0px;
                                     margin: 0 8px 0 -3px;
+                                    line-height: 45px;
+                                    vertical-align: top;
                                     overflow: hidden;
                                     transition: all 0.3s ease;
                                 }
@@ -4135,6 +4432,8 @@ register();
                                     display: inline-block;
                                     width: 0px;
                                     margin: 0 8px 0 -3px;
+                                    line-height: 45px;
+                                    vertical-align: top;
                                     overflow: hidden;
                                     transition: all 0.3s ease;
                                 }
@@ -4254,8 +4553,9 @@ register();
 
         // 中国的软件
         .content_sorft{
-            width: 100%;
-            // width: 1440px;
+            // width: 100%;
+            margin: 0 0 0 -40px;
+            width: 1440px;
             height: 464px;
             padding: 100px 0 60px 0;
             background-color: rgb(245, 245, 245);
@@ -4400,6 +4700,7 @@ register();
             padding-top: 100px;
             .wrapper{
                 margin: 0 9.55%;
+                position: relative;
 
                 .industry_title{
                     font-size: 34px;
@@ -4473,40 +4774,38 @@ register();
                                 
                             }
                         }
-                    }
-
-                    // 左按钮
-                    .prevDiv{
-                        position: absolute;
-                        z-index: 999;
-                        left: 32px;
-                        top: 286px;
-                        margin: 0 -5%;
-                        transform: rotate(0.5turn);
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgb(33, 131, 233);
-                            overflow: visible;
-                        }
-                    }
-                    // 右按钮
-                    .nextDiv{
-                        position: absolute;
-                        z-index: 999;
-                        right: 32px;
-                        top: 286px;
-                        margin: 0 -5%;
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgb(33, 131, 233);
-                            overflow: visible;
-                        }
-                    }
+                    }        
+                }
+                // 左按钮
+                .prevDiv{
+                    position: absolute;
+                    z-index: 999;
+                    left: -60px;
+                    top: 425px;
+                    margin: 0 -5%;
+                    transform: rotate(0.5turn);
+                    cursor: pointer;
                     
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
+                }
+                // 右按钮
+                .nextDiv{
+                    position: absolute;
+                    z-index: 999;
+                    right: -60px;
+                    top: 425px;
+                    margin: 0 -5%;
+                    cursor: pointer;
+                    
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
                 }
                 
             }
@@ -4519,6 +4818,7 @@ register();
             padding-top: 100px;
             .wrapper{
                 margin: 0 9.55%;
+                position: relative;
 
                 .bank_title{
                     font-size: 34px;
@@ -4600,7 +4900,7 @@ register();
                                             position: absolute;
                                             bottom: 13px;
                                             left: 80px;
-                                            transition: all 1s ease;
+                                            transition: all 0.5s ease;
                                         }
                                     }
                                     .more_box:hover .title_more{
@@ -4613,55 +4913,138 @@ register();
                             }
                         }
                     }
-
-                    // 左按钮
-                    .prevDiv{
-                        position: absolute;
-                        z-index: 999;
-                        left: 32px;
-                        top: 286px;
-                        margin: 0 -5%;
-                        transform: rotate(0.5turn);
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgb(33, 131, 233);
-                            overflow: visible;
-                        }
-                    }
-                    // 右按钮
-                    .nextDiv{
-                        position: absolute;
-                        z-index: 999;
-                        right: 32px;
-                        top: 286px;
-                        margin: 0 -5%;
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgb(33, 131, 233);
-                            overflow: visible;
-                        }
-                    }
                     
+                }
+                // 左按钮
+                .prevDiv{
+                    position: absolute;
+                    z-index: 999;
+                    left: -60px;
+                    top: 317px;
+                    margin: 0 -5%;
+                    transform: rotate(0.5turn);
+                    cursor: pointer;
+                    
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
+                }
+                // 右按钮
+                .nextDiv{
+                    position: absolute;
+                    z-index: 999;
+                    right: -60px;
+                    top: 317px;
+                    margin: 0 -5%;
+                    cursor: pointer;
+                    
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
                 }
                 
             }
         }
 
         // 轮播图
+        .content_srollImg{
+            height: 150px;
+            overflow: hidden;
+            // background-color: lightblue;
+            width: 2440px;
+            margin: 0 -10%;
+            .scroll_box{
+                // border: 1px solid yellow;
+                width: 1640px;
+                position: relative;
+                animation: 10s linear 0s infinite reverse slidein;
+                @keyframes slidein {
+                    from {
+                        margin-left: -10px;
+                    }
+                    to {
+                        margin-left: 500px;
+                    }
+                }
+                .scroll_item1{
+                    width: 260px;
+                    height: 140px;
+                    // border: 1px solid red;
+                    // margin: 0 10px;
+                    left: 460px;
+                    position: absolute;
+                    display: inline-block;
+
+                    .icon-shunfengsuyun{
+                        font-size:130px;
+                        color: rgb(170, 170, 170);
+                    }
+                    
+                }
+                .scroll_item2{
+                    width: 260px;
+                    height: 140px;
+                    // border: 1px solid red;
+                    // margin: 0 10px;
+                    left: 830px;
+                    display: inline-block;
+                    position: absolute;
+                    
+                    .icon-shunfengsuyun{
+                        font-size:130px;
+                        color: rgb(170, 170, 170);
+                    }
+                    
+                }
+                .scroll_item3{
+                    width: 260px;
+                    height: 140px;
+                    // border: 1px solid red;
+                    left: 1200px;
+                    display: inline-block;
+                    position: absolute;
+                   
+                    .icon-shunfengsuyun{
+                        font-size:130px;
+                        color: rgb(170, 170, 170);
+                    }
+                    
+                   
+                }
+                .scroll_item5{
+                    width: 260px;
+                    height: 140px;
+                    // border: 1px solid red;
+                    left: 100px;
+                    display: inline-block;
+                    position: absolute;
+
+                    .icon-shunfengsuyun{
+                        font-size:130px;
+                        color: rgb(170, 170, 170);
+                    }
+                }
+            }
+            
+           
+        }
 
         // 资料下载
         .content_material{
             width: 100%;
+            margin: 0 0 0 -40px;
+            width: 1440px;
             height: 344px;
             padding: 100px 0;
             background-color: rgb(20, 45, 68);
 
             .wrapper{
                 margin: 0 9.55%;
+                position: relative;
 
                 .material_title{
                     font-size: 34px;
@@ -4761,40 +5144,38 @@ register();
                         .swiper_slide:nth-of-type(3n+3) .slide .img{
                             border: none;
                         }
-                    }
-
-                    // 左按钮
-                    .prevDiv{
-                        position: absolute;
-                        z-index: 999;
-                        left: 32px;
-                        top: 80px;
-                        margin: 0 -5%;
-                        transform: rotate(0.5turn);
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgba(255, 255, 255, 0.795);
-                            overflow: visible;
-                        }
-                    }
-                    // 右按钮
-                    .nextDiv{
-                        position: absolute;
-                        z-index: 999;
-                        right: 32px;
-                        top: 80px;
-                        margin: 0 -5%;
-                        cursor: pointer;
-                        
-                        .icon-jiantou2{
-                            font-size: 100px;
-                            color: rgb(255, 255, 255, 0.795);
-                            overflow: visible;
-                        }
-                    }
+                    }  
+                }
+                // 左按钮
+                .prevDiv{
+                    position: absolute;
+                    z-index: 999;
+                    left: -60px;
+                    top: 140px;
+                    margin: 0 -5%;
+                    transform: rotate(0.5turn);
+                    cursor: pointer;
                     
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
+                }
+                // 右按钮
+                .nextDiv{
+                    position: absolute;
+                    z-index: 999;
+                    right: -60px;
+                    top: 140px;
+                    margin: 0 -5%;
+                    cursor: pointer;
+                    
+                    .icon-jiantou2{
+                        font-size: 100px;
+                        color: rgb(33, 131, 233);
+                        overflow: visible;
+                    }
                 }
                 
             }
@@ -4805,6 +5186,8 @@ register();
             height:391px;
             background-color: rgb(245, 252, 255);
             position: relative;
+            margin: 0 0 0 -40px;
+            width: 1440px;
 
             .wrapper{
                 margin: 0 12.5%;
@@ -4861,6 +5244,8 @@ register();
         .content_score{
             padding: 3.55% 0;
             background-color: rgb(36, 63, 84);
+            margin: 0 0 0 -40px;
+            width: 1440px;
             .text{
                 font-size: 32px;
                 color: white;
@@ -4903,24 +5288,27 @@ register();
             
         }
 
-        // footer部分
 
     }
 
     // footer部分
     .footer_content{
         background-color: rgb(20, 45, 68);
-        height: 536px;
+        height: 570px;
+        margin: 0 0 0 -40px;
+        width: 1440px;
         .wrapper{
-            margin: 0 5.9%;
+            margin: 0 1% 0 5.9%;
             padding-top: 38px;
             margin-bottom: 33px;
+            position: relative;
             // 左侧
             .footer_left{
-                width: 25.6%;
+                width: 24.1%;
                 height: 303px;
                 display: inline-block;
                 vertical-align: middle;
+                margin-bottom: 33px;
                 // 307x303
                 .logo{
                     margin-bottom: 35px;
@@ -4948,20 +5336,37 @@ register();
                 }
                 .img{
                     margin-top: 10px;
+
                     .icon-weixin{
                         font-size: 46px;
                         color: rgba(255, 255, 255, 0.5);
                         margin-right: 14px;
                         vertical-align: middle;
+                        cursor: pointer;
+                        // 微信qr
+                        .qr{
+                            position: absolute;
+                            left: -45px;
+                            top: 258px;
+                           
+                            .qr_img{
+                                width: 0px;
+                                height: 35px;
+                            }
+                        }
                     }
                     .icon-weixin:hover{
                         color: white;
+                    }
+                    .icon-weixin:hover .qr .qr_img{
+                        width: 35px;
                     }
                     .icon-weibo{
                         font-size: 42px;
                         color: rgba(255, 255, 255, 0.5);
                         margin-right: 14px;
                         vertical-align: middle;
+                        cursor: pointer;
                     }
                     .icon-weibo:hover{
                         color: white;
@@ -4971,6 +5376,7 @@ register();
                         color: rgba(255, 255, 255, 0.5);
                         margin-right: 14px;
                         vertical-align: middle;
+                        cursor: pointer;
                     }
                     .icon-shejiaotubiao-46:hover{
                         color: white;
@@ -4980,13 +5386,20 @@ register();
             // 右侧
             .footer_right{
                 display: inline-block;
-                width: 74%;
-                // vertical-align: middle;
+                width: 75%;
+                position: relative;
+                vertical-align: top;
+                // border: 1px solid red;
                 // ul
                 .title_list{
+                    
                     // li
                     .title_item{
                         display: inline-block;
+                        margin-right: 80px;
+                        // border: 1px solid yellow;
+                        vertical-align: top;
+
                         .title{
                             margin-bottom: 10px;
                             font-size: 18px;
@@ -4995,16 +5408,364 @@ register();
                         }
                         // ul
                         .detail_list{
+                            // position: absolute;
+                            vertical-align: top;
+                            // margin-right: 90px;
+        
                             // li
                             .detail_item{
                                 .detail{
-
+                                    font-size: 14px;
+                                    line-height: 32px;
+                                    color: rgba(255, 255, 255, 0.5);
                                 }
+                            }
+                            .detail_item:hover .detail{
+                                color: white;
                             }
                         }
                     }
                 }
             }
+            // 底部
+            .footer_partner{
+                padding: 18px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                width: 94%;
+
+                .name{
+                    font-size: 14px;
+                    line-height: 32px;
+                    color: rgba(255, 255, 255, 0.5);
+                    display: inline-block;
+                }
+                // ul
+                .partner_list{
+                    display: inline-block;
+                    width: 80%;
+                    vertical-align: top;
+
+                    // li
+                    .partner_item{
+                        display: inline-block;
+                        margin: 0 10px;
+                        cursor: pointer;
+
+                        .partner_name{
+                            font-size: 14px;
+                            line-height: 32px;
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                        .partner_name:hover{
+                            color: white;
+                        }
+                    }
+                }
+            }
+            .footer_site{
+                padding: 24px 0 34.5px 0;
+                position: relative;
+                p{
+                    font-size: 14px;
+                    line-height: 32px;
+                    color: rgba(255, 255, 255, 0.5);
+                    display: inline-block;
+                    padding-right: 10px;
+                    cursor: pointer;
+                }
+                p:hover{
+                    color: white;
+                }
+                .low{
+                    position: absolute;
+                    right: 65px;
+                }
+            }
+        }
+    }
+
+    // 侧边栏
+    .sidebar{
+        width: 80px;
+        height: 329px;
+        background-color: rgb(47, 128, 244);
+        border-radius: 20px;
+        position: fixed;
+        right: 0px;
+        top: 219px;
+        // background-color: white;
+        z-index: 999;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 2px 29px 0px;
+        
+        // 售前服务
+        .sidebar_pre{
+            height: 20%;
+            width: 100%;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(229, 229, 229, 0.2);
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            display: inline-block;
+
+            .pre_img{
+                width: 30px;
+                height: 30px;
+                padding: 0 22px;
+
+                .icon-liaotian{
+                    font-size: 35px;
+                    color: white;
+                    line-height: 38px;
+                }
+            }
+            .pre_text{
+                font-size: 12px;
+                color: white;
+                line-height: 48px;
+                text-align: center;
+            }
+
+            // 售前服务hover出现box
+            .pre_more_box{
+                position: absolute;
+                right: -555px;
+                top: 0px;
+                z-index: 88;
+                width: 377px;
+                // width: 0px;
+                border-radius: 20px;
+                transition: all 0.5s ease-in-out;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                
+                .box_top{
+                    background-color: rgb(47, 128, 244);
+                    width: 100%;
+                    height: 227px;
+                    border-radius: 20px 20px 0 0;
+
+                    .top_img{
+                        padding: 40px 168px 0 168px;
+                        
+                        .icon-dadianhua{
+                            font-size: 37px;
+                            color: white;
+                            line-height: 50px;
+                            text-align: center;
+                        }
+                    }
+                    .top_text{
+                        margin: 20px 0;
+                        font-size: 16px;
+                        line-height: 16px;
+                        color: white;
+                        text-align: center;
+                    }
+                    .top_phone{
+                        font-size: 30px;
+                        line-height: 30px;
+                        color: white;
+                        text-align: center;
+                    }
+                }
+                .box_bottom{
+                    width: 100%;
+                    height: 151px;
+                    background-color: rgb(245, 245, 245);
+                    border-radius: 0 0 20px 20px;
+
+                    .bottom_left{
+                        display: inline-block;
+                        background-color: rgb(255, 255, 255);
+                        width: 55%;
+                        height: 100%;
+                        vertical-align: top;
+                        padding-left: 30px;
+                        border-radius: 0 0 20px 20px;
+
+                        .left_top{
+                            margin-top: 20px;
+                            .img_box{
+                                display: inline-block;
+                                vertical-align: middle;
+
+                                .icon-liaotian{
+                                    font-size: 25px;
+                                    color: rgb(33, 131, 233);
+                                    line-height: 30px;
+                                }
+                            }
+                            .text{
+                                display: inline-block;
+                                font-size: 16px;
+                                color: rgb(47, 128, 244);
+                                line-height: 24px;
+                                width: 62%;
+                                padding-left: 20px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .left_bottom{
+                            font-size: 16px;
+                            color: rgb(255, 255, 255);
+                            line-height: 24px;
+                            background-color: rgb(47, 128, 244);
+                            cursor: pointer;
+                            border-radius: 5px;
+                            margin: 20px 0 0 45px;
+                            padding: 3px 0 ;
+                            width: 115px;
+                            text-align: center;
+                            
+                        }
+                    }
+                    .bottom_right{
+                        display: inline-block;
+                        padding: 13px 0px 13px 7px;
+                        img{
+                            width: 125px;
+                            height: 125px;
+                        }
+                    }
+                }
+            }
+        }
+        .sidebar_pre:hover{
+            background-color: rgb(17, 105, 228);
+        }
+        .sidebar_pre:hover .pre_more_box{
+            right: 100px;
+        }
+        
+        // 售后服务
+        .sidebar_after{
+            height: 19%;
+            width: 100%;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(229, 229, 229, 0.2);
+
+            .after_img{
+                width: 30px;
+                height: 30px;
+                padding: 0 22px;
+
+                .icon-jishiliaotian{
+                    font-size: 35px;
+                    color: white;
+                    line-height: 38px;
+                }
+            }
+            .after_text{
+                font-size: 12px;
+                color: white;
+                line-height: 48px;
+                text-align: center;
+            }
+        }
+        .sidebar_after:hover{
+            background-color: rgb(17, 105, 228);
+        }
+
+        // 个人号
+        .sidebar_self{
+            position: relative;
+            height: 20%;
+            width: 100%;
+            padding: 22px 0;
+            border-radius: 0 0 20px 20px;
+            // border-bottom: 1px solid rgba(229, 229, 229, 0.2);
+
+            .self_img{
+                width: 30px;
+                height: 30px;
+                padding: 0 24px;
+
+                .icon-geren{
+                    font-size: 32px;
+                    color: white;
+                    line-height: 30px;
+                }
+            }
+            .self_text{
+                font-size: 12px;
+                color: white;
+                line-height: 18px;
+                padding: 10px 0;
+                text-align: center;
+            }
+            .self_more_box{
+                position: absolute;
+                right: -555px;
+                top: -80px;
+                z-index: 88;
+                padding: 20px;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                transition: all 0.5s ease-in-out;
+
+                // vertical-align: top;
+                img{
+                    width: 125px;
+                    height: 125px;
+                }
+            }
+        }
+        .sidebar_self:hover{
+            background-color: rgb(17, 105, 228);
+        }
+        .sidebar_self:hover .self_more_box{
+            right: 90px;
+        }
+    }
+
+
+    // 搜索box
+    .search_box{
+        width: 451px;
+        height: 48px;
+        position: absolute;
+        // position: sticky;
+        position: fixed;
+        top: 42px;
+        // top: 100px;
+        right: 108px;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(125, 125, 125, 0.34);
+        border-radius: 2px;
+        // transition: opacity 0.2s ease;
+        animation-name: search;
+        animation-duration: 1.5s;
+        z-index: 999;
+        overflow: hidden;
+
+        input{
+            background:none;  
+            outline:none;  
+            border:none;
+            color: none;
+            padding: 5px 20px;
+            font-size: 16px;
+            line-height: 38px;
+            width: 80%;
+            color: black;
+        }
+        .search_img{
+            // top: 18px;
+            width: 23px;
+            height: 23px;
+            padding: 0 10px;
+            vertical-align: middle;
+            display: inline-block;
+            cursor: pointer;
+        }     
+    }
+    @keyframes search {
+        from {
+            width: 0px;
+        }
+
+        to {
+            width: 451px;
         }
     }
 
