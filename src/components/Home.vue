@@ -3,12 +3,6 @@
     <div class="content_warp">
         <div class="content">
 
-            <!-- 搜索框 -->
-            <div class="search_box" v-if="isSearch == true">
-                <input type="text" placeholder="请输入关键词">
-                <img src="@/assets/magnifier.svg" class="search_img">
-            </div>
-
             <!-- header部分 -->
             <div class="header_content">
 
@@ -24,7 +18,6 @@
                     >
                         <li class="header_nav_item"
                             v-for="(item,index) of navData"
-
                             :key="index">
                             <!-- 一级导航栏 -->
                             <a  class="nav_item_text"
@@ -147,7 +140,7 @@
                                     <!-- 查看更多产品消息 -->
                                     <div class="left_item_more" v-if="index == 0">
                                         <a href="#" class="left_item_more_href">查看所有产品 ></a>
-                                        <p class="left_item_more_text">销售热线: 4008-830-830</p>
+                                        <a href="tel:4008-830-830" class="left_item_more_text">销售热线: 4008-830-830</a>
                                     </div>
                                 </ul>
                                 <!-- 三级导航栏的更多推荐 type2-->
@@ -232,7 +225,7 @@
                             </div>
                         </div>
                         <div class="header_loginAndregister_right">
-                            <a href="#" class="header_login_right">
+                            <a href="./login.vue" class="header_login_right">
                                 登录 
                             </a>
                             <span>|</span>
@@ -246,8 +239,13 @@
                         v-if="isSearch == false"
                     >
                         <img src="@/assets/phone.svg" alt="call" class="icon">
-                        <p class="header_buy_call_number">4008-830-830</p>
+                        <a href="tel:4008-830-830" class="header_buy_call_number">4008-830-830</a>
                         <a href="#" class="header_buy_button">申请体验</a>
+                    </div>
+                    <!-- 搜索框 -->
+                    <div class="search_box" v-if="isSearch == true">
+                        <input type="text" placeholder="请输入关键词">
+                        <img src="@/assets/magnifier.svg" class="search_img">
                     </div>
                     <!-- 搜索 -->
                     <a href="#" class="header_search">
@@ -613,14 +611,6 @@
                                     >
                                         <div class="number_box">
                                             <p class="number_num nn">{{ number.num }}</p>
-                                            <!-- <p class="number_num nn">{{ count }}</p> -->
-                                            <!-- <NumberAnimation class="number_num" 
-                                                            :from="0" 
-                                                            :to="number.num"
-                                                            duration='2000'
-                                                            :key="number_index"
-                                                            >{{ number.num }}
-                                            </NumberAnimation> -->
                                             <p class="number_unit">{{ number.unit }}</p>
                                         </div>
                                         <div class="number_text_top">{{ number.textTop }}</div>
@@ -674,9 +664,6 @@
                             class="content_cont"
                             :space-between="spaceBetween"
                             :centered-slides="true"
-                            :pagination="{
-                                hideOnClick: true
-                            }"
                         >
                             <!-- slide1 -->
                             <swiper-slide>
@@ -723,9 +710,9 @@
                 </div>
 
                 <!-- 公司列表 -->
-                <div class="content_bank">
+                <div class="content_bank" >
                     <div class="wrapper">
-                        <h2 class="bank_title">
+                        <h2 class="bank_title" @click="notVideoPlay">
                             成就客户
                             <br>
                             做成功企业背后的软件公司
@@ -741,9 +728,6 @@
                             class="content_cont"
                             :space-between="spaceBetween"
                             :centered-slides="true"
-                            :pagination="{
-                                hideOnClick: true
-                            }"
                         >
                             <!-- slide1 -->
                             <swiper-slide>
@@ -752,19 +736,9 @@
                                         v-for="(slide,slide_index) of bankSlideList1"
                                         :key="slide_index"                
                                     >
-                                        <a :href="slide.href" class="slide">
-                                            <div class="img">
+                                        <div :href="slide.href" class="slide">
+                                            <div class="img" @click="videoPlay">
                                                 <img :src="slide.bkImg" class="cont">
-                                                <!-- <video class="cont"
-                                                    ref="videoRef"
-                                                    :src="videoUrl"
-                                                    width="100%"
-                                                    height="224"
-                                                    autoplay
-                                                    controls
-                                                    @timeupdate="handleTimeUpdate"
-                                                >
-                                                </video> -->
                                                 <img src="@/assets/index_video.png" class="logo">
                                             </div>
                                             <div class="title">
@@ -775,7 +749,7 @@
                                                     <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </swiper-slide>
@@ -786,8 +760,8 @@
                                         v-for="(slide,slide_index) of bankSlideList2"
                                         :key="slide_index"
                                     >
-                                        <a :href="slide.href" class="slide">
-                                            <div class="img">
+                                        <div :href="slide.href" class="slide">
+                                            <div class="img" @click="videoPlay">
                                                 <img :src="slide.bkImg" class="cont">
                                                 <img src="@/assets/index_video.png" class="logo">
                                             </div>
@@ -799,43 +773,46 @@
                                                     <img src="@/assets/arrow_right_blue.svg" class="title_arrow">
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </swiper-slide>
                         </swiper-container>
+                    </div>
+                     <!-- 视屏弹窗 -->
+                    <div class="video">
+                        <video class="video_play"
+                            ref="videoRef"
+                            src="@/assets/demo.mp4"
+                            autoplay
+                            controls
+                            v-if="isVideo == true"
+                            
+                        > 
+                        </video>
                     </div>
                 </div>
 
                 <!-- 轮播图 -->
                 <!-- <scrollImg /> -->
                 <div class="content_srollImg">
-                    <!-- <ul class="scroll_list">
-                        <li class="scroll_item" 
-                            v-for="(scroll,scroll_index) of scrollList"
-                            :key="scroll_index"
-                        >
-                            <i class="iconfont icon-jiantou2"></i>
-                        </li>
-                    </ul> -->
-                    <div class="scroll_box">
+                    <marquee  
+                        class="scroll1"
+                        > 
                         <div class="scroll_item1">
                             <i class="iconfont icon-shunfengsuyun"></i>
-                        </div>
+                        </div> 
                         <div class="scroll_item2">
                             <i class="iconfont icon-shunfengsuyun"></i>
-                        </div>
+                        </div> 
                         <div class="scroll_item3">
                             <i class="iconfont icon-shunfengsuyun"></i>
-                        </div>
-                        <!-- <div class="scroll_item4">
-                            <i class="iconfont icon-shunfengsuyun"></i>
-                        </div> -->
-                        <div class="scroll_item5">
+                        </div> 
+                        <div class="scroll_item4">
                             <i class="iconfont icon-shunfengsuyun"></i>
                         </div> 
-                    </div>
                         
+                    </marquee>
                 </div>
 
                 <!-- 资料下载 -->
@@ -855,10 +832,11 @@
                             class="content_cont"
                             :space-between="spaceBetween"
                             :centered-slides="true"
-                            :pagination="{
-                                hideOnClick: true
-                            }"
+                            
                         >
+                        <!-- :pagination="{
+                            hideOnClick: true
+                        }" -->
                             <!-- slide1 -->
                             <swiper-slide>
                                 <div class="swiper_wrapper">
@@ -926,7 +904,7 @@
                                 <div class="qr_intro">
                                     扫码获取一对一服务
                                     <br>
-                                    或致电 4008-830-830
+                                    或致电 <a href="tel:4008-830-830">4008-830-830</a>
                                 </div>
                             </div>
                         </div>
@@ -957,9 +935,9 @@
                             <img src="@/assets/logohei.gif">
                         </div>
                         <div class="consult">售前咨询热线</div>
-                        <div class="phone">4008-830-830</div>
+                        <a href="tel:4008-830-830" class="phone">4008-830-830</a>
                         <div class="consult">售后服务热线</div>
-                        <div class="phone">4008-830-830</div>
+                        <a href="tel:4008-830-830" class="phone">4008-830-830</a>
                         <div class="focus">关注金蝶</div>
                         <div class="img">
                             <i class="iconfont icon-weixin">
@@ -1091,7 +1069,7 @@ import hotSpot1 from '@/assets/hotspot1.jpg'
 import hotSpot2 from '@/assets/hotspot2.jpg'
 import hotSpot3 from '@/assets/hotspot3.jpg'
 import logo from '@/assets/Settings.svg'
-import scrollImg from './test.vue'
+// import scrollImg from './test.vue'
 import backTop from './backtop.vue'
 // import NumberAnimation from "vue-number-animation";
 import { Icon } from 'vant'
@@ -1117,15 +1095,6 @@ register();
     const onSlideChange = (e) => {
         console.log('slide changed')
     }
-
-    // const onProgress1 = (e) => {
-    //     const [swiper,progress] = e.currentTarget.parentElement.detail;
-    //     console.log(progress)
-    // };
-    // const onSlideChange1 = (e) => {
-    //     console.log('slide changed')
-    // }
-
 
     let swiper = ref(null);
     const prevSlide = () => {
@@ -1171,19 +1140,16 @@ register();
     
    
     // 播放视频
-    //播放
-    // const data = ref([
-    //     {
-    //         baseUrl:'https://www.bilibili.com/video/BV1ey411e7Wg/?spm_id_from=333.1007.tianma.2-2-4.click&vd_source=324c4fd6b362e7c5749bc7f823dc6fcb'
-    //     }
-    // ])
-    // const handlePlayVideo = (data) => {
-    //     videoUrl.value = data?.baseUrl;
-    // };
-    //下载
-    // const handleDownload = (data) => {
-    // window.open(data?.baseUrl, "_blank");
-    // };
+    let isVideo = ref(false);
+    const videoPlay = () => {
+        isVideo.value = true;
+        console.log(isVideo.value)
+    }
+    const notVideoPlay = () => {
+        isVideo.value = false;
+        console.log(isVideo.value)
+    }
+
 
 
     // 语言选择、登录、注册  
@@ -2932,45 +2898,7 @@ register();
     ]
 
     // 轮播图
-    // const scrollList = [
-    //     {
-    //         id:'1',
-    //     },
-    //     {
-    //         id:'2',
-    //     },
-    //     {
-    //         id:'3',
-    //     },
-    //     {
-    //         id:'4',
-    //     },
-    //     {
-    //         id:'5',
-    //     },
-    //     {
-    //         id:'6',
-    //     },
-    //     {
-    //         id:'7',
-    //     },
-    //     {
-    //         id:'8',
-    //     },
-    //     {
-    //         id:'9',
-    //     },
-    //     {
-    //         id:'10',
-    //     },
-    //     {
-    //         id:'11',
-    //     },
-    //     {
-    //         id:'12',
-    //     },
-    // ]
-
+    
     // 资源下载
     const materialSlideList1 = [
         {
@@ -3304,16 +3232,6 @@ register();
             // background-color: rgb(215, 250, 219);   
         }
 
-        // @media screen and (min-width: 600px){
-        //     .content{
-        //         width: 600px;
-        //     }
-        // }
-        // @media screen and (min-width: 800px){
-        //     .content{
-        //         width: 900px;
-        //     }
-        // }
         @media screen and (min-width: 1000px){
             .content{
                 width: 1200px;
@@ -3327,11 +3245,6 @@ register();
         @media screen and (min-width: 2200px){
             .content{
                 width: 2000px;
-            }
-        }
-        @media screen and (min-width: 2500px){
-            .content{
-                width: 2300px;
             }
         }
 
@@ -3732,6 +3645,7 @@ register();
                             padding-top: 2px;
                             color: rgb(47, 52, 63);
                             font-size: 12px;
+                            display: block;
                         }
                     }
                 }
@@ -4009,6 +3923,60 @@ register();
                     padding: 10px 28px;
                     display: inline-block;
                     cursor: pointer;
+                }
+            }
+
+             // 搜索box
+            .search_box{
+                width: 451px;
+                height: 48px;
+                position: absolute;
+                // position: sticky;
+                // position: fixed;
+                top: 28px;
+                // top: 100px;
+                right: 108px;
+                background-color: rgb(255, 255, 255);
+                border: 1px solid rgba(125, 125, 125, 0.34);
+                border-radius: 2px;
+                // transition: opacity 0.2s ease;
+                animation-name: search;
+                animation-duration: 1.5s;
+                z-index: 999;
+                overflow: hidden;
+
+                input{
+                    background:none;  
+                    outline:none;  
+                    border:none;
+                    color: none;
+                    padding: 5px 20px;
+                    font-size: 16px;
+                    line-height: 38px;
+                    width: 80%;
+                    position: absolute;
+                    color: black;
+                }
+                .search_img{
+                    // top: 18px;
+                    width: 23px;
+                    height: 23px;
+                    padding: 0 10px;
+                    vertical-align: middle;
+                    display: inline-block;
+                    cursor: pointer;
+                    position: absolute;
+                    right: 0px;
+                    top: 12px;
+                }     
+            }
+            @keyframes search {
+                from {
+                    width: 0px;
+                }
+
+                to {
+                    width: 451px;
                 }
             }
         }
@@ -4698,6 +4666,7 @@ register();
             width: 100%;
             height: 812px;
             padding-top: 100px;
+            overflow: hidden;
             .wrapper{
                 margin: 0 9.55%;
                 position: relative;
@@ -4816,6 +4785,7 @@ register();
             width: 100%;
             height: 812px;
             padding-top: 100px;
+            position: relative;
             .wrapper{
                 margin: 0 9.55%;
                 position: relative;
@@ -4854,6 +4824,7 @@ register();
                                 
                                 .img{
                                     position: relative;
+                                    cursor: pointer;
                                     .cont{
                                         width: 100%;
                                         height: 224px;
@@ -4948,6 +4919,20 @@ register();
                 }
                 
             }
+            // 视频弹窗
+            .video{
+                position: absolute;
+                top: 100px;
+                left: 180px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                background-color: white;
+                z-index: 99;
+                .video_play{
+                    width: 1000px;
+                    height: 600px;
+                    border-radius: 5px;
+                } 
+            }
         }
 
         // 轮播图
@@ -4955,73 +4940,52 @@ register();
             height: 150px;
             overflow: hidden;
             // background-color: lightblue;
-            width: 2440px;
-            margin: 0 -10%;
-            .scroll_box{
-                // border: 1px solid yellow;
-                width: 1640px;
-                position: relative;
-                animation: 10s linear 0s infinite reverse slidein;
-                @keyframes slidein {
-                    from {
-                        margin-left: -10px;
-                    }
-                    to {
-                        margin-left: 500px;
-                    }
-                }
+            width: 1600px;
+            margin: 0 -5%;
+            .scroll1{
+                display: inline-block;
+                width: 1460px;
+                position: absolute;
+                left: -40px;
+                z-index: 1;
                 .scroll_item1{
                     width: 260px;
                     height: 140px;
-                    // border: 1px solid red;
-                    // margin: 0 10px;
-                    left: 460px;
-                    position: absolute;
                     display: inline-block;
+                    // margin-left: 150px;
 
                     .icon-shunfengsuyun{
                         font-size:130px;
                         color: rgb(170, 170, 170);
                     }
-                    
                 }
                 .scroll_item2{
                     width: 260px;
                     height: 140px;
-                    // border: 1px solid red;
-                    // margin: 0 10px;
-                    left: 830px;
                     display: inline-block;
-                    position: absolute;
-                    
+                    margin-left: 100px;
+
                     .icon-shunfengsuyun{
                         font-size:130px;
                         color: rgb(170, 170, 170);
                     }
-                    
                 }
                 .scroll_item3{
                     width: 260px;
                     height: 140px;
-                    // border: 1px solid red;
-                    left: 1200px;
                     display: inline-block;
-                    position: absolute;
-                   
+                    margin-left: 100px;
+
                     .icon-shunfengsuyun{
                         font-size:130px;
                         color: rgb(170, 170, 170);
                     }
-                    
-                   
                 }
-                .scroll_item5{
+                .scroll_item4{
                     width: 260px;
                     height: 140px;
-                    // border: 1px solid red;
-                    left: 100px;
                     display: inline-block;
-                    position: absolute;
+                    margin-left: 100px;
 
                     .icon-shunfengsuyun{
                         font-size:130px;
@@ -5029,8 +4993,7 @@ register();
                     }
                 }
             }
-            
-           
+  
         }
 
         // 资料下载
@@ -5230,8 +5193,9 @@ register();
                 .img{
                     display: inline-block;
                     position: absolute;
-                    bottom: -2.5px;
+                    bottom: -2px;
                     right: 60px;
+
                     img{
                         width: 530px;
                         height: 304px;
@@ -5287,8 +5251,6 @@ register();
             }
             
         }
-
-
     }
 
     // footer部分
@@ -5328,6 +5290,7 @@ register();
                     line-height: 40px;
                     color: rgb(255, 255, 255);
                     margin-bottom: 16px;
+                    display: block;
                 }
                 .focus{
                     font-size: 14px;
@@ -5346,12 +5309,12 @@ register();
                         // 微信qr
                         .qr{
                             position: absolute;
-                            left: -45px;
-                            top: 258px;
+                            left: -70px;
+                            top: 250px;
                            
                             .qr_img{
                                 width: 0px;
-                                height: 35px;
+                                height: 60px;
                             }
                         }
                     }
@@ -5359,7 +5322,7 @@ register();
                         color: white;
                     }
                     .icon-weixin:hover .qr .qr_img{
-                        width: 35px;
+                        width: 60px;
                     }
                     .icon-weibo{
                         font-size: 42px;
@@ -5719,55 +5682,8 @@ register();
     }
 
 
-    // 搜索box
-    .search_box{
-        width: 451px;
-        height: 48px;
-        position: absolute;
-        // position: sticky;
-        position: fixed;
-        top: 42px;
-        // top: 100px;
-        right: 108px;
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgba(125, 125, 125, 0.34);
-        border-radius: 2px;
-        // transition: opacity 0.2s ease;
-        animation-name: search;
-        animation-duration: 1.5s;
-        z-index: 999;
-        overflow: hidden;
 
-        input{
-            background:none;  
-            outline:none;  
-            border:none;
-            color: none;
-            padding: 5px 20px;
-            font-size: 16px;
-            line-height: 38px;
-            width: 80%;
-            color: black;
-        }
-        .search_img{
-            // top: 18px;
-            width: 23px;
-            height: 23px;
-            padding: 0 10px;
-            vertical-align: middle;
-            display: inline-block;
-            cursor: pointer;
-        }     
-    }
-    @keyframes search {
-        from {
-            width: 0px;
-        }
 
-        to {
-            width: 451px;
-        }
-    }
 
 
 
